@@ -132,6 +132,29 @@ footer {
   .hero h1 { font-size: 34px; }
 }
 
+.result-card {
+  animation: slideUp 0.6s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+.status {
+  color: #d97706;
+  font-weight: 700;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
   </style>
 </head>
 <body>  <!-- Header -->  <header>
@@ -204,6 +227,7 @@ function trackOrder() {
   // Demo tracking records
   // Demo tracking records
   // Demo tracking records
+  // Demo tracking records
   const records = {
     "#81403": {
       name: "Tersia LEONIE Hesseling",
@@ -225,6 +249,14 @@ function trackOrder() {
       contact: "N/A",
       status: "$500 Paid! Awaiting Balance of $200",
       message: "Your package is currently at our warehouse and awaiting full payment for delivery to proceed."
+    },
+    "#915302": {
+      name: "Andrew Tidwell",
+      address: "1863 County Road 2235, Cleveland, Texas 77327, USA",
+      contact: "832 599 2503",
+      email: "Drewcountyboy@gmail.com",
+      status: "Awaiting payment",
+      message: "Your package is currently at our warehouse and awaiting payment for delivery to proceed."
     }
   };
 
@@ -232,13 +264,17 @@ function trackOrder() {
     const r = records[trackingId];
     resultBox.style.display = 'block';
     resultBox.innerHTML = `
-      <h3>${r.name}</h3>
-      <p><strong>Address:</strong> ${r.address}</p>
-      <p><strong>Contact info:</strong> ${r.contact}</p>
-      <p><strong>Status:</strong> <span style=\"color:#d97706;font-weight:700;\">${r.status}</span></p>
-      <hr style=\"margin:15px 0;\" />
-      <p>${r.message}</p>
+      <div class="result-card">
+        <h3>${r.name}</h3>
+        <p><strong>Address:</strong> ${r.address}</p>
+        ${r.email ? `<p><strong>Email:</strong> ${r.email}</p>` : ''}
+        <p><strong>Contact info:</strong> ${r.contact}</p>
+        <p><strong>Status:</strong> <span class="status">${r.status}</span></p>
+        <hr style="margin:15px 0;" />
+        <p>${r.message}</p>
+      </div>
     `;
+    resultBox.classList.add('fade-in');
   } else {
     resultBox.style.display = 'block';
     resultBox.innerHTML = '<strong>Tracking ID not found.</strong> Please check and try again.';
@@ -249,4 +285,4 @@ document.getElementById('trackBtn').addEventListener('click', trackOrder);
 
   </script>
 </body>
-        </html>
+                                                                                             </html>
