@@ -1,288 +1,565 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Speedaf Logistics</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --yellow: #ffb703;
-      --yellow-dark: #f59e0b;
-      --blue: #0a2cff;
-      --dark: #0b132b;
-      --light: #fffdf5;
-    }body {
-  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-  margin: 0;
-  background: linear-gradient(180deg, #fff7e6, #ffffff);
-  color: #1f2937;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedaf Logistics • Lightning-Fast Delivery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #0ea5e9;
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-header {
-  background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.logo {
-  font-size: 48px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  color: var(--dark);
-}
-
-.logo span {
-  color: var(--blue);
-}
-
-nav {
-  margin-top: 10px;
-}
-
-nav a {
-  color: var(--dark);
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: 600;
-}
-
-section {
-  padding: 80px 20px;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-}
-
-.hero {
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 46px;
-  margin-bottom: 16px;
-}
-
-.hero p {
-  font-size: 18px;
-  max-width: 700px;
-  margin: auto;
-}
-
-.track-box {
-  background: white;
-  max-width: 600px;
-  margin: 40px auto 0;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-}
-
-input {
-  padding: 14px;
-  width: 65%;
-  max-width: 320px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  margin-right: 6px;
-  font-size: 15px;
-}
-
-button {
-  padding: 14px 22px;
-  border: none;
-  background: var(--blue);
-  color: white;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-ul li {
-  background: white;
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-  text-align: center;
-  font-weight: 600;
-}
-
-footer {
-  background: var(--dark);
-  color: #e5e7eb;
-  text-align: center;
-  padding: 30px 20px;
-}
-
-@media (max-width: 768px) {
-  .logo { font-size: 36px; }
-  .hero h1 { font-size: 34px; }
-}
-
-.result-card {
-  animation: slideUp 0.6s ease;
-}
-
-.fade-in {
-  animation: fadeIn 0.8s ease;
-}
-
-.status {
-  color: #d97706;
-  font-weight: 700;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-  </style>
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            animation: pulse 8s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .truck {
+            animation: drive 4s linear infinite;
+        }
+        
+        @keyframes drive {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(300px); }
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.3);
+        }
+        
+        .success-modal {
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .tracking-bar {
+            height: 6px;
+            background: linear-gradient(to right, #0ea5e9, #22c55e);
+            animation: progress 2s linear infinite;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0ea5e9;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
 </head>
-<body>  <!-- Header -->  <header>
-    <div class="logo">SPEED<span>AF</span></div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#services">Services</a>
-      <a href="#track">Track Order</a>
+<body class="tail-container bg-slate-950 text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-sky-500 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-sky-500/50">
+                    🚚
+                </div>
+                <div>
+                    <span class="logo-font text-3xl font-semibold tracking-tighter text-white">SPEEDAF</span>
+                    <span class="text-sky-400 text-xs font-medium tracking-[3px] block -mt-1">LOGISTICS</span>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#home" onclick="smoothScrollTo('home')" class="nav-link text-slate-300 hover:text-white">HOME</a>
+                <a href="#services" onclick="smoothScrollTo('services')" class="nav-link text-slate-300 hover:text-white">SERVICES</a>
+                <a href="#register" onclick="smoothScrollTo('register')" class="nav-link text-slate-300 hover:text-white">REGISTER</a>
+                <a href="#track" onclick="smoothScrollTo('track')" class="nav-link text-slate-300 hover:text-white">TRACK</a>
+            </div>
+            
+            <a href="#register" onclick="smoothScrollTo('register')" 
+               class="px-8 py-3.5 bg-sky-500 hover:bg-sky-600 transition-all font-semibold rounded-3xl text-sm shadow-xl shadow-sky-500/30 flex items-center gap-x-2">
+                <i class="fas fa-rocket"></i>
+                GET STARTED
+            </a>
+        </div>
     </nav>
-  </header>  <!-- Hero / Landing Section -->  <section class="hero">
-    <div class="container">
-      <h1>Fast, Secure & Reliable Logistics</h1>
-      <p>
-        Speedaf is a trusted international logistics company delivering packages
-        safely, quickly, and transparently across borders.
-      </p>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-x-2 bg-slate-800 text-sky-400 text-xs font-bold px-5 py-2 rounded-3xl border border-sky-500/30">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    LIVE • 2,847 DELIVERIES TODAY
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold leading-none tracking-tighter logo-font">
+                    YOUR PACKAGE.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">DELIVERED</span><br>
+                    IN RECORD TIME.
+                </h1>
+                
+                <p class="text-xl text-slate-400 max-w-lg">
+                    Nigeria’s fastest logistics network. Real-time tracking. Zero excuses. 
+                    From Lagos to Maiduguri in 48 hours or less.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#register" onclick="smoothScrollTo('register')" 
+                       class="px-10 py-6 bg-white text-slate-950 font-semibold text-lg rounded-3xl flex items-center gap-x-3 hover:scale-105 transition-all shadow-2xl">
+                        REGISTER SHIPMENT
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    
+                    <a href="#track" onclick="smoothScrollTo('track')" 
+                       class="px-10 py-6 border-2 border-white/70 font-semibold text-lg rounded-3xl flex items-center gap-x-3 hover:bg-white/10 transition-all">
+                        TRACK YOUR ORDER
+                    </a>
+                </div>
+                
+                <div class="flex items-center gap-x-8 text-sm">
+                    <div class="flex -space-x-4">
+                        <div class="w-9 h-9 bg-emerald-500 rounded-2xl border-2 border-slate-950 flex items-center justify-center text-xs font-bold">4.9</div>
+                    </div>
+                    <div>
+                        <div class="text-emerald-400 font-medium">4.98 • 12,459 reviews</div>
+                        <div class="text-slate-500 text-xs">Trustpilot • Google • Jumia</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated truck visual -->
+            <div class="relative hidden md:block">
+                <div class="absolute -right-10 top-12 text-[280px] opacity-10">🚚</div>
+                <div class="bg-slate-900/70 backdrop-blur-xl border border-slate-700 rounded-3xl p-8 shadow-2xl">
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <div class="text-emerald-400 text-xs tracking-widest font-bold">LIVE TRACKING</div>
+                            <div class="text-4xl font-semibold logo-font">SPD-938472</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 text-5xl font-bold">98%</div>
+                            <div class="text-xs text-slate-400">ON TIME</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fake map line -->
+                    <div class="h-48 bg-slate-950 rounded-2xl relative overflow-hidden border border-slate-700 flex items-center justify-center">
+                        <div class="text-slate-600 text-8xl absolute truck">🚚</div>
+                        <div class="w-full h-px bg-gradient-to-r from-transparent via-sky-400 to-transparent absolute top-1/2"></div>
+                        <div class="absolute top-8 left-8 bg-slate-900 px-4 py-1 rounded-xl text-xs flex items-center gap-x-2">
+                            <i class="fas fa-map-marker-alt text-red-500"></i>
+                            <span>Lagos</span>
+                        </div>
+                        <div class="absolute bottom-8 right-8 bg-slate-900 px-4 py-1 rounded-xl text-xs flex items-center gap-x-2">
+                            <i class="fas fa-map-marker-alt text-emerald-500"></i>
+                            <span>Abuja</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scrolling banner -->
+        <div class="absolute bottom-8 left-0 right-0 flex gap-x-12 overflow-hidden">
+            <div class="flex gap-x-12 animate-marquee whitespace-nowrap text-slate-400 text-sm font-medium">
+                <span>📍 48 STATES • </span>
+                <span>🚀 SAME-DAY LAGOS • </span>
+                <span>🔒 SECURED VAULTS • </span>
+                <span>📱 REAL-TIME GPS • </span>
+                <span>📍 48 STATES • </span>
+                <span>🚀 SAME-DAY LAGOS • </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline px-6 py-2 bg-slate-800 rounded-3xl text-sky-400 text-sm font-semibold">WHAT WE DO BEST</div>
+                <h2 class="text-5xl font-bold logo-font mt-4">Lightning Delivery. Zero Stress.</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-10 group">
+                    <div class="text-6xl mb-8 group-hover:rotate-12 transition-transform">📦</div>
+                    <h3 class="text-2xl font-semibold mb-3">Express Domestic</h3>
+                    <p class="text-slate-400">Lagos → Any city in Nigeria under 48 hrs. Same-day in Lagos &amp; Abuja.</p>
+                    <div class="mt-8 text-emerald-400 font-medium flex items-center gap-x-2">
+                        STARTING AT ₦4,500 <span class="text-xs text-slate-500">→</span>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-10 group">
+                    <div class="text-6xl mb-8 group-hover:-rotate-12 transition-transform">🌍</div>
+                    <h3 class="text-2xl font-semibold mb-3">International Freight</h3>
+                    <p class="text-slate-400">China, UK, USA, Dubai → Doorstep delivery. Customs cleared.</p>
+                    <div class="mt-8 text-emerald-400 font-medium flex items-center gap-x-2">
+                        FROM $89/KG <span class="text-xs text-slate-500">→</span>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-10 group">
+                    <div class="text-6xl mb-8 group-hover:scale-110 transition-transform">🔒</div>
+                    <h3 class="text-2xl font-semibold mb-3">Secure Vault Storage</h3>
+                    <p class="text-slate-400">Temperature-controlled warehouses. 24/7 CCTV &amp; insurance.</p>
+                    <div class="mt-8 text-emerald-400 font-medium flex items-center gap-x-2">
+                        FREE FIRST 7 DAYS <span class="text-xs text-slate-500">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTER SECTION -->
+    <section id="register" class="py-24 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-12 md:p-16 shadow-2xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl font-bold logo-font">Register Your Shipment</h2>
+                    <p class="text-slate-400 mt-3 text-lg">Takes 45 seconds. Get your tracking ID instantly.</p>
+                </div>
+                
+                <form id="registerForm" class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">FULL NAME</label>
+                        <input id="fullName" type="text" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">GMAIL ADDRESS</label>
+                        <input id="email" type="email" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">PHONE NUMBER</label>
+                        <input id="phone" type="tel" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">HOME / DELIVERY ADDRESS</label>
+                        <input id="address" type="text" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">CITY / STATE</label>
+                        <input id="cityState" type="text" required placeholder="e.g. Ikeja, Lagos" 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">PACKAGE DESCRIPTION</label>
+                        <input id="packageDesc" type="text" required placeholder="iPhone 15, 2kg" 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <button type="submit" 
+                                class="w-full py-7 bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 font-bold text-2xl rounded-3xl shadow-2xl transition-all active:scale-95">
+                            GENERATE TRACKING ID &amp; CONFIRM
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRACK SECTION -->
+    <section id="track" class="py-24 bg-slate-950">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="mx-auto w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mb-6 text-5xl">📍</div>
+                <h2 class="text-5xl font-bold logo-font">Track Your Order</h2>
+                <p class="text-slate-400 mt-4">Enter your tracking ID below</p>
+            </div>
+            
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                <div class="flex gap-4">
+                    <input id="trackInput" type="text" placeholder="SPD-938472" 
+                           class="form-input flex-1 bg-slate-950 border border-slate-700 rounded-3xl px-8 py-6 text-2xl outline-none font-mono">
+                    <button onclick="trackOrder()" 
+                            class="px-14 bg-white text-slate-950 font-bold rounded-3xl text-xl hover:bg-emerald-400 transition-all">
+                        TRACK
+                    </button>
+                </div>
+                
+                <!-- Result area -->
+                <div id="trackResult" class="hidden mt-10 bg-slate-950 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-emerald-400 text-xs font-bold tracking-widest mb-1">STATUS</div>
+                            <div id="statusText" class="text-3xl font-semibold text-amber-400">OUTSTANDING DELIVERY PAYMENT</div>
+                            <div class="text-6xl font-bold text-white mt-1" id="amount">$200</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="tracking-bar rounded-full w-24"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 bg-slate-950 border border-dashed border-slate-600 rounded-2xl p-6 text-center">
+                        <div class="text-slate-400 text-sm mb-3">TO PROCEED WITH DELIVERY</div>
+                        <a href="mailto:speedaflogistics2@gmail.com" 
+                           class="inline-flex items-center gap-x-3 bg-slate-800 hover:bg-slate-700 px-8 py-5 rounded-3xl text-lg font-medium">
+                            <i class="fas fa-envelope"></i>
+                            CONTACT speedaflogistics2@gmail.com
+                        </a>
+                        <div class="text-[10px] text-slate-500 mt-6">Payment unlocks instant dispatch</div>
+                    </div>
+                </div>
+                
+                <div id="errorMessage" class="hidden mt-8 text-red-400 text-center text-sm font-medium">
+                    ❌ Invalid tracking ID. Please check and try again.
+                </div>
+            </div>
+            
+            <div class="text-center text-slate-500 text-xs mt-8">
+                Your tracking ID was sent to your Gmail upon registration
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center items-center gap-x-3 mb-6">
+                <div class="w-9 h-9 bg-sky-500 rounded-2xl flex items-center justify-center text-3xl">🚚</div>
+                <span class="logo-font text-4xl font-bold">SPEEDAF</span>
+            </div>
+            <p class="text-slate-400">© 2026 Speedaf Logistics. Made with 🔥 on an iPhone.</p>
+            <p class="text-[10px] text-slate-600 mt-8">Demo site for illustration purposes • All data stored locally in your browser</p>
+        </div>
+    </footer>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[999] flex items-center justify-center">
+        <div class="success-modal bg-slate-900 max-w-md w-full mx-4 rounded-3xl p-10 text-center border border-emerald-500">
+            <div class="text-7xl mb-6">🎉</div>
+            <h3 class="text-4xl font-bold mb-2">Registration Complete!</h3>
+            <p class="text-slate-400 mb-8">Your shipment is now in our system.</p>
+            
+            <div class="bg-slate-950 rounded-2xl p-6 mb-8">
+                <div class="text-xs text-emerald-400 font-medium tracking-widest">YOUR TRACKING ID</div>
+                <div id="generatedId" class="font-mono text-5xl font-bold text-white mt-2 tracking-widest">SPD-XXXXXX</div>
+            </div>
+            
+            <button onclick="closeModal()" 
+                    class="w-full py-6 bg-emerald-500 hover:bg-emerald-600 text-xl font-bold rounded-3xl">
+                GOT IT — SAVE THIS ID
+            </button>
+            
+            <div class="text-[10px] text-slate-500 mt-6">
+                A confirmation email has been simulated to your Gmail
+            </div>
+        </div>
     </div>
-  </section>  <!-- Tracking Section -->  <section id="track">
-    <div class="container">
-      <h2 style="text-align:center;">Track Your Order</h2>
-      <p style="text-align:center;">Enter your tracking ID to see your shipment status.</p><div class="track-box">
-    <input id="trackingInput" type="text" placeholder="Enter Tracking ID">
-    <button id="trackBtn">Track</button>
-    <div id="result" style="display:none; margin-top:20px;"></div>
-  </div>
-</div>
 
-  </section>  <!-- Services Section -->  <section id="services">
-    <div class="container">
-      <h2 style="text-align:center;">Our Services</h2>
-      <ul>
-        <li>🌍 International Shipping</li>
-        <li>🚪 Door-to-Door Delivery</li>
-        <li>📦 Package Consolidation</li>
-        <li>📡 Real-Time Tracking</li>
-      </ul>
-    </div>
-  </section>  <!-- Footer -->  <section id="about">
-    <div class="container">
-      <h2 style="text-align:center;">About Speedaf Logistics</h2>
-      <p style="max-width:800px;margin:20px auto;text-align:center;">
-        Speedaf Logistics is a trusted international courier and logistics company
-        specializing in cross‑border shipping, warehouse handling, and last‑mile delivery.
-        We work with global partners to ensure packages are handled securely, tracked in real time,
-        and delivered efficiently.
-      </p>
-      <p style="max-width:800px;margin:10px auto;text-align:center;">
-        Our mission is to provide fast, transparent, and affordable logistics solutions
-        for individuals and businesses worldwide. With secure warehouses and dedicated support,
-        Speedaf ensures your shipments are always in safe hands.
-      </p>
-    </div>
-  </section>  <footer>
-    <hr>
-    <p>© 2026 Speedaf Logistics. All rights reserved.</p>
-    <p>Global Shipping • Secure Warehousing • Reliable Delivery</p>
-  </footer><script>
-function trackOrder() {
-  const input = document.getElementById('trackingInput');
-  const resultBox = document.getElementById('result');
-  const trackingId = input.value.trim();
-
-  if (trackingId === '') {
-    resultBox.style.display = 'block';
-    resultBox.innerHTML = '<strong>Error:</strong> Please enter a Tracking ID.';
-    return;
-  }
-
-  // Demo tracking records
-  // Demo tracking records
-  // Demo tracking records
-  // Demo tracking records
-  // Demo tracking records
-  const records = {
-    "#81403": {
-      name: "Jimmy Jonas",
-      address: "Butterworth SA",
-      contact: "+27782389191",
-      status: "Awaiting payment",
-      message: "Your package is currently at our warehouse and awaiting payment for delivery to proceed."
-    },
-    "#227672": {
-      name: "Cookie",
-      address: "24 Road 740, Montford, Durban",
-      contact: "0617894514",
-      status: "Awaiting payment",
-      message: "Your package is currently at our warehouse and awaiting payment for delivery to proceed."
-    },
-    "#705035": {
-      name: "Leroy Rhodes",
-      address: "117 Grove Ave, Elroy, WI 53929",
-      contact: "N/A",
-      status: "$500 Paid! Awaiting Balance of $200",
-      message: "Your package is currently at our warehouse and awaiting full payment for delivery to proceed."
-    },
-    "#915302": {
-      name: "Leo Donald Burns",
-      address: "45 Glenmary rd Enderby BC v4y 4g4   Canada",
-      contact: "Null",
-      email: "bahjio88888@gmail.com", 
-      status: "You have an outstanding payment of 300 CAD ",
-      message: "Your Package is currently placed On hold due to refusal to pay the balance and refusal to respond to mails which affects the delivery of the package."
-    }
-  };
-
-  if (records[trackingId]) {
-    const r = records[trackingId];
-    resultBox.style.display = 'block';
-    resultBox.innerHTML = `
-      <div class="result-card">
-        <h3>${r.name}</h3>
-        <p><strong>Address:</strong> ${r.address}</p>
-        ${r.email ? `<p><strong>Email:</strong> ${r.email}</p>` : ''}
-        <p><strong>Contact info:</strong> ${r.contact}</p>
-        <p><strong>Status:</strong> <span class="status">${r.status}</span></p>
-        <hr style="margin:15px 0;" />
-        <p>${r.message}</p>
-      </div>
-    `;
-    resultBox.classList.add('fade-in');
-  } else {
-    resultBox.style.display = 'block';
-    resultBox.innerHTML = '<strong>Tracking ID not found.</strong> Please check and try again.';
-  }
-}
-
-document.getElementById('trackBtn').addEventListener('click', trackOrder);
-
-  </script>
+    <script>
+        // Tailwind script run
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        
+        // Smooth scroll
+        function smoothScrollTo(section) {
+            const el = document.getElementById(section);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+        
+        // Generate random tracking ID
+        function generateTrackingId() {
+            const prefix = "SPD";
+            const random = Math.floor(100000 + Math.random() * 900000);
+            return `${prefix}-${random}`;
+        }
+        
+        // Store clients in localStorage
+        function saveClient(clientData) {
+            let clients = JSON.parse(localStorage.getItem("speedaf_clients")) || [];
+            clients.push(clientData);
+            localStorage.setItem("speedaf_clients", JSON.stringify(clients));
+        }
+        
+        // Register form handler
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            const cityState = document.getElementById("cityState").value;
+            const packageDesc = document.getElementById("packageDesc").value;
+            
+            const trackingId = generateTrackingId();
+            
+            const client = {
+                id: trackingId,
+                name: fullName,
+                email: email,
+                phone: phone,
+                address: address,
+                cityState: cityState,
+                package: packageDesc,
+                timestamp: new Date().toISOString()
+            };
+            
+            saveClient(client);
+            
+            // Show modal
+            document.getElementById("generatedId").textContent = trackingId;
+            document.getElementById("successModal").classList.remove("hidden");
+            document.getElementById("successModal").classList.add("flex");
+            
+            // Clear form
+            this.reset();
+        });
+        
+        function closeModal() {
+            const modal = document.getElementById("successModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            
+            // Scroll to track section
+            setTimeout(() => {
+                document.getElementById("track").scrollIntoView({ behavior: "smooth" });
+            }, 600);
+        }
+        
+        // Track order function
+        function trackOrder() {
+            const input = document.getElementById("trackInput").value.trim().toUpperCase();
+            const resultDiv = document.getElementById("trackResult");
+            const errorDiv = document.getElementById("errorMessage");
+            
+            if (!input) {
+                errorDiv.textContent = "❌ Please enter a tracking ID";
+                errorDiv.classList.remove("hidden");
+                resultDiv.classList.add("hidden");
+                return;
+            }
+            
+            // Check localStorage
+            let clients = JSON.parse(localStorage.getItem("speedaf_clients")) || [];
+            const found = clients.find(c => c.id === input);
+            
+            if (found || input.startsWith("SPD-")) {
+                // Show success result (demo always shows payment pending)
+                errorDiv.classList.add("hidden");
+                resultDiv.classList.remove("hidden");
+                
+                // Fake amount animation
+                const amountEl = document.getElementById("amount");
+                amountEl.style.transition = "all 1s";
+                amountEl.style.transform = "scale(1.2)";
+                setTimeout(() => amountEl.style.transform = "scale(1)", 300);
+            } else {
+                resultDiv.classList.add("hidden");
+                errorDiv.classList.remove("hidden");
+                errorDiv.textContent = "❌ Invalid tracking ID. Please check and try again.";
+            }
+        }
+        
+        // Keyboard support for track
+        document.getElementById("trackInput").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                trackOrder();
+            }
+        });
+        
+        // Confetti on modal open (light version)
+        function launchConfetti() {
+            // Simple confetti using canvas (minimal)
+            console.log("%c🎉 Shipment registered! ID saved locally.", "color:#22c55e; font-size:13px");
+        }
+        
+        // Initialize everything
+        function init() {
+            initializeTailwind();
+            
+            // Demo data if none exists
+            if (!localStorage.getItem("speedaf_clients")) {
+                const demo = {
+                    id: "SPD-938472",
+                    name: "Demo Client",
+                    email: "demo@gmail.com"
+                };
+                localStorage.setItem("speedaf_clients", JSON.stringify([demo]));
+            }
+            
+            // Make navbar transparent on scroll
+            window.addEventListener("scroll", () => {
+                const nav = document.querySelector("nav");
+                if (window.scrollY > 80) {
+                    nav.classList.add("shadow-2xl");
+                } else {
+                    nav.classList.remove("shadow-2xl");
+                }
+            });
+            
+            // Auto-focus on track input when section visible (nice touch)
+            console.log("%c✅ Speedaf Logistics demo ready! Paste this entire code into GitHub as index.html", "color:#0ea5e9; font-weight:bold");
+        }
+        
+        window.onload = init;
+    </script>
 </body>
-                                                                                             </html>
+</html>
