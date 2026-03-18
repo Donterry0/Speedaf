@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thiga Bank • Demo</title>
+    <title>Credit Affinity Union</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -30,21 +30,15 @@
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
-    <!-- DEMO WARNING -->
-    <div class="bg-red-600 text-white text-center py-2 text-xs font-medium fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-2">
-        <i class="fas fa-exclamation-triangle"></i>
-        <span>DEMO ONLY • NOT A REAL BANK • FOR PORTFOLIO PURPOSES • DO NOT ENTER REAL DATA</span>
-    </div>
-
     <!-- LOGIN PAGE -->
     <div id="login-page" class="min-h-screen flex items-center justify-center pt-14 px-4">
         <div class="max-w-md w-full bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden">
             <div class="bg-emerald-600 p-8 text-center">
                 <div class="flex items-center justify-center gap-3">
                     <div class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-emerald-600 text-3xl font-bold logo-font">T</div>
-                    <h1 class="text-4xl font-bold logo-font tracking-tight">Thiga Bank</h1>
+                    <h1 class="text-4xl font-bold logo-font tracking-tight">Credit Affinity Union Bank</h1>
                 </div>
-                <p class="text-emerald-100 mt-1 text-sm">United States • Demo</p>
+                <p class="text-emerald-100 mt-1 text-sm">United States</p>
             </div>
 
             <div class="p-8">
@@ -71,9 +65,9 @@
                 </form>
 
                 <div class="mt-8 text-center text-xs text-zinc-500">
-                    Demo credentials:<br>
-                    <span class="font-mono text-emerald-400">Sandrabullocks@gmail.com</span><br>
-                    <span class="font-mono text-emerald-400">#Godtrust098</span>
+                    :<br>
+                    <span class="font-mono text-emerald-400"></span><br>
+                    <span class="font-mono text-emerald-400">#</span>
                 </div>
             </div>
         </div>
@@ -91,7 +85,7 @@
             <div class="space-y-8">
                 <input id="verify-code" type="text" maxlength="6" inputmode="numeric"
                        class="w-full text-center text-4xl tracking-[12px] bg-zinc-800 border border-zinc-700 rounded-2xl py-6 focus:outline-none focus:border-emerald-500 font-mono"
-                       placeholder="705035" autocomplete="one-time-code">
+                       placeholder="" autocomplete="one-time-code">
 
                 <button onclick="verifyCode()" 
                         class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-2xl font-semibold text-lg transition">
@@ -103,7 +97,7 @@
             </div>
             
             <div class="mt-10 text-center text-xs text-zinc-500">
-                Demo code: <span class="font-mono bg-zinc-800 px-2 py-1 rounded">705035</span>
+       
             </div>
         </div>
     </div>
@@ -116,7 +110,7 @@
             <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold logo-font text-2xl">T</div>
-                    <span class="font-semibold text-2xl logo-font tracking-tight">Thiga Bank</span>
+                    <span class="font-semibold text-2xl logo-font tracking-tight">Credit Affinity Union Bank</span>
                 </div>
                 <div class="flex items-center gap-6 text-sm font-medium">
                     <span onclick="logout()" class="flex items-center gap-2 text-red-400 cursor-pointer hover:text-red-500">
@@ -235,7 +229,7 @@
                     </div>
                 </div>
                 <button onclick="processDeposit()" 
-                        class="w-full bg-emerald-600 py-5 rounded-2xl font-semibold text-lg">Deposit (Demo)</button>
+                        class="w-full bg-emerald-600 py-5 rounded-2xl font-semibold text-lg">Deposit </button>
                 <button onclick="hideDepositModal()" class="w-full text-zinc-400 py-4">Cancel</button>
             </div>
         </div>
@@ -281,7 +275,7 @@
         <div class="bg-zinc-900 w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-8 text-center">
             <div class="mx-auto w-20 h-20 bg-emerald-600/10 rounded-full flex items-center justify-center text-6xl mb-6">📲</div>
             <h3 class="text-2xl font-semibold mb-2">Receive Money</h3>
-            <p class="text-emerald-400 text-xl mb-8">Demo Account — We're testing this</p>
+            <p class="text-emerald-400 text-xl mb-8">s</p>
             
             <div class="bg-zinc-800 rounded-2xl p-6 text-left text-sm mb-8">
                 <div class="flex justify-between py-3 border-b border-zinc-700">
@@ -310,7 +304,7 @@
             <h2 class="text-3xl font-semibold mb-2">Thank you for visiting</h2>
             <p class="text-zinc-400 mb-10">my Demo bank website</p>
             
-            <a href="mailto:sofihellpcentrre098@gmail.com?subject=Thiga Bank Demo Feedback&amp;body=I have checked this website and it is of high value"
+            <a href="mailto:sofihellpcentrre098@gmail.com?subject=My Credit Affinity Union Bank Account Is Frozen, I need help Unfreezing It"
                onclick="hideSuccessModal()" 
                class="block bg-emerald-600 hover:bg-emerald-500 py-6 rounded-3xl text-xl font-semibold">
                 Click here to make payment
@@ -399,7 +393,7 @@
                 currentBalance += amt;
                 updateBalance();
                 hideDepositModal();
-                alert(`$${amt.toFixed(2)} deposited (demo)`);
+                alert(`$${amt.toFixed(2)} Cannot be deposited at the moment`);
             }
         }
 
@@ -456,7 +450,7 @@
 
         // Tailwind ready + mobile ready
         window.onload = () => {
-            console.log('%cThiga Bank Demo ready for mobile & desktop', 'color:#10b981; font-weight:bold');
+            console.log('%Credit Affinity Union Bank', 'color:#10b981; font-weight:bold');
         };
     </script>
 </body>
