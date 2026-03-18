@@ -1,457 +1,514 @@
-< ! DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Affinity Union</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Thiga Bank • Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .logo-font { font-family: 'Playfair Display', serif; }
-        
-        .frozen { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
-        /* Mobile-first improvements */
-        .modal { animation: slideUp 0.3s ease forwards; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        
-        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
-        
+        :root {
+            --bg: #050505;
+            --card: #0f0f0f;
+            --border: #1a1a1a;
+            --text: #f5f5f5;
+            --muted: #9ca3af;
+            --accent: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .logo-font { font-family: 'Playfair Display', serif; }
+
+        .card-hover {
+            transition: all 0.22s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.4);
+        }
+
+        .shimmer-balance {
+            background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-text 2.2s infinite;
+        }
+        @keyframes shimmer-text {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #111 0%, #1a1a1a 50%, #111 100%);
+            background-size: 200% 100%;
+            animation: loading 1.6s infinite;
+        }
+        @keyframes loading {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .frozen-pulse {
+            animation: frozen 2.4s infinite ease-in-out;
+        }
+        @keyframes frozen {
+            0%,100% { opacity: 0.9; }
+            50%     { opacity: 0.55; }
+        }
+
+        .modal-enter {
+            animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.94) translateY(12px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
         @media (max-width: 640px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .bottom-nav { bottom: 0; left: 0; right: 0; border-radius: 0; }
+            .balance-display { font-size: 2.6rem; line-height: 1; }
         }
     </style>
 </head>
-<body class="bg-zinc-950 text-white min-h-screen">
+<body>
 
-    <!-- LOGIN PAGE -->
-    <div id="login-page" class="min-h-screen flex items-center justify-center pt-14 px-4">
-        <div class="max-w-md w-full bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden">
-            <div class="bg-emerald-600 p-8 text-center">
-                <div class="flex items-center justify-center gap-3">
-                    <div class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-emerald-600 text-3xl font-bold logo-font">T</div>
-                    <h1 class="text-4xl font-bold logo-font tracking-tight">Credit Affinity Union Bank</h1>
+    <!-- DEMO WARNING BAR -->
+    <div class="fixed top-0 inset-x-0 z-50 bg-gradient-to-r from-red-900/90 to-rose-900/90 text-white text-center py-2 text-xs font-medium backdrop-blur-sm border-b border-red-800/40">
+        <i class="fa-solid fa-circle-exclamation mr-1.5"></i>
+        DEMO ONLY • NOT A REAL BANK • NO REAL TRANSACTIONS OR MONEY • PORTFOLIO DEMONSTRATION
+    </div>
+
+    <!-- LOGIN -->
+    <div id="login-page" class="min-h-screen flex items-center justify-center pt-16 px-5">
+        <div class="w-full max-w-md bg-black/60 backdrop-blur-xl border border-zinc-800/70 rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-br from-emerald-800 to-emerald-950 p-10 text-center">
+                <div class="flex justify-center items-center gap-3 mb-2">
+                    <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-emerald-800 text-4xl font-bold logo-font shadow-lg">T</div>
+                    <h1 class="text-5xl font-bold logo-font tracking-tight text-white">Thiga</h1>
                 </div>
-                <p class="text-emerald-100 mt-1 text-sm">United States</p>
+                <p class="text-emerald-100/70 text-sm">Demo Banking Experience</p>
             </div>
 
-            <div class="p-8">
-                <h2 class="text-2xl font-semibold mb-2 text-center">Sign in</h2>
-                <p class="text-zinc-400 text-center text-sm mb-8">Secure access to your accounts</p>
-                
+            <div class="p-9">
+                <h2 class="text-2xl font-semibold text-center mb-2">Welcome back</h2>
+                <p class="text-center text-zinc-400 text-sm mb-8">Sign in to view your accounts</p>
+
                 <form id="login-form" class="space-y-6">
                     <div>
-                        <label class="block text-sm font-medium text-zinc-400 mb-1">Email</label>
-                        <input type="email" id="email" 
-                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-emerald-500" 
-                               required>
+                        <label class="block text-sm font-medium text-zinc-400 mb-1.5">Email address</label>
+                        <input id="email" type="email" required autocomplete="email"
+                               class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/30 transition"
+                               placeholder="Sandrabullocks@gmail.com" />
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-zinc-400 mb-1">Password</label>
-                        <input type="password" id="password" 
-                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-emerald-500" 
-                               placeholder="••••••••" required>
+                        <label class="block text-sm font-medium text-zinc-400 mb-1.5">Password</label>
+                        <input id="password" type="password" required autocomplete="current-password"
+                               class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/30 transition"
+                               placeholder="••••••••" />
                     </div>
-                    <button type="submit" 
-                            class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-2xl font-semibold text-lg transition">
-                        Continue
+                    <button type="submit"
+                            class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 py-4.5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
+                        Sign In
                     </button>
                 </form>
 
                 <div class="mt-8 text-center text-xs text-zinc-500">
-                    <br>
-                    <span class="font-mono text-emerald-400"></span><br>
-                    <span class="font-mono text-emerald-400"></span>
+                    Demo credentials<br>
+                    <span class="font-mono bg-zinc-900 px-2 py-0.5 rounded">Sandrabullocks@gmail.com</span><br>
+                    <span class="font-mono bg-zinc-900 px-2 py-0.5 rounded">#Godtrust098</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- VERIFICATION PAGE -->
-    <div id="verification-page" class="hidden min-h-screen flex items-center justify-center pt-14 px-4 bg-zinc-950">
-        <div class="max-w-md w-full bg-zinc-900 rounded-3xl shadow-2xl p-8">
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 mx-auto bg-emerald-600/10 rounded-full flex items-center justify-center text-4xl mb-4">🔒</div>
-                <h2 class="text-2xl font-semibold">Two-factor verification</h2>
-                <p class="text-zinc-400 mt-2">Enter the 6-digit code sent to your device</p>
+    <!-- 2FA -->
+    <div id="verification-page" class="hidden min-h-screen flex items-center justify-center pt-16 px-5 bg-black">
+        <div class="w-full max-w-md bg-black/60 backdrop-blur-xl border border-zinc-800/70 rounded-3xl p-10 shadow-2xl">
+            <div class="text-center mb-10">
+                <div class="w-20 h-20 mx-auto bg-emerald-950/40 rounded-full flex items-center justify-center text-5xl mb-6">🔐</div>
+                <h2 class="text-2xl font-semibold mb-2">Verification Required</h2>
+                <p class="text-zinc-400 text-sm">Enter the 6-digit code sent to your device</p>
             </div>
 
             <div class="space-y-8">
-                <input id="verify-code" type="text" maxlength="6" inputmode="numeric"
-                       class="w-full text-center text-4xl tracking-[12px] bg-zinc-800 border border-zinc-700 rounded-2xl py-6 focus:outline-none focus:border-emerald-500 font-mono"
-                       placeholder="" autocomplete="one-time-code">
+                <input id="verify-code" type="text" maxlength="6" inputmode="numeric" pattern="\d{6}" autocomplete="one-time-code"
+                       class="w-full text-center text-5xl tracking-[1.4em] bg-zinc-900 border border-zinc-700 rounded-xl py-6 focus:outline-none focus:border-emerald-500/60 font-mono"
+                       placeholder="705035" />
 
-                <button onclick="verifyCode()" 
-                        class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-2xl font-semibold text-lg transition">
-                    Verify &amp; Continue
+                <button onclick="verifyCode()"
+                        class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 py-4.5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
+                    Verify
                 </button>
-                
-                <button onclick="backToLogin()" 
-                        class="w-full py-4 text-zinc-400 hover:text-white text-sm">← Back to login</button>
+
+                <button onclick="backToLogin()" class="w-full text-zinc-400 hover:text-zinc-200 text-sm py-3 transition">
+                    ← Back to sign in
+                </button>
             </div>
-            
+
             <div class="mt-10 text-center text-xs text-zinc-500">
-       
+                For demo: <span class="font-mono bg-zinc-900 px-2 py-1 rounded">705035</span>
             </div>
         </div>
     </div>
 
     <!-- DASHBOARD -->
-    <div id="dashboard-page" class="hidden min-h-screen bg-zinc-950 pb-24">
+    <div id="dashboard-page" class="hidden min-h-screen bg-black pb-32">
 
-        <!-- Top Nav -->
-        <nav class="bg-zinc-900 border-b border-zinc-800 sticky top-12 z-40">
-            <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+        <!-- Top bar -->
+        <nav class="bg-black/70 backdrop-blur-xl border-b border-zinc-800/50 sticky top-14 z-40">
+            <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold logo-font text-2xl">T</div>
-                    <span class="font-semibold text-2xl logo-font tracking-tight">Credit Affinity Union Bank</span>
+                    <div class="w-10 h-10 bg-emerald-800 rounded-2xl flex items-center justify-center text-white font-bold logo-font text-2xl shadow">T</div>
+                    <span class="text-2xl font-semibold logo-font tracking-tight">Thiga Bank</span>
                 </div>
-                <div class="flex items-center gap-6 text-sm font-medium">
-                    <span onclick="logout()" class="flex items-center gap-2 text-red-400 cursor-pointer hover:text-red-500">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </span>
+                <div class="flex items-center gap-6">
+                    <div class="relative">
+                        <button id="notif-btn" class="text-zinc-300 hover:text-white transition relative">
+                            <i class="fa-solid fa-bell text-xl"></i>
+                            <span class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center ring-2 ring-black">1</span>
+                        </button>
+                        <div id="notif-dropdown" class="hidden absolute right-0 mt-3 w-80 bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden z-50">
+                            <div class="p-4 border-b border-zinc-800">
+                                <div class="flex items-start gap-3">
+                                    <div class="text-2xl">⚠️</div>
+                                    <div>
+                                        <p class="font-medium">New device login detected</p>
+                                        <p class="text-sm text-zinc-400 mt-1">Lagos, Nigeria • Chrome • Today 7:41 PM</p>
+                                        <button class="text-xs text-emerald-400 hover:underline mt-2">Review activity</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="logout()" class="text-red-400 hover:text-red-300 text-sm font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out
+                    </button>
                 </div>
             </div>
         </nav>
 
-        <div class="max-w-7xl mx-auto px-5 pt-8 dashboard-grid grid gap-6">
+        <main class="max-w-6xl mx-auto px-5 pt-8">
 
-            <!-- Balance Card -->
-            <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700 card-hover">
-                <div class="flex justify-between">
+            <!-- Balance -->
+            <div class="bg-gradient-to-br from-zinc-950 to-black border border-zinc-800/60 rounded-3xl p-8 mb-7 shadow-2xl card-hover">
+                <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs text-zinc-400 font-medium">CHECKING •••• 4872</p>
-                        <div class="mt-4">
-                            <span id="balance-amount" class="text-5xl font-semibold tracking-tighter">$342,520.71</span>
+                        <div class="flex items-center gap-3 text-sm text-zinc-400">
+                            <span>CHECKING •••• 4872</span>
+                            <button id="toggle-balance-btn" class="text-zinc-500 hover:text-zinc-300 transition">
+                                <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
+                            </button>
                         </div>
-                        <div class="mt-6 inline-flex items-center gap-2 px-5 py-1.5 bg-red-600/20 text-red-400 text-xs font-medium rounded-2xl frozen">
-                            <i class="fas fa-lock"></i> ACCOUNT FROZEN
+                        <div class="mt-5">
+                            <span id="balance-display" class="block text-5xl sm:text-6xl font-semibold tracking-tight">$430,056.70</span>
+                        </div>
+                        <div class="mt-5 inline-flex items-center gap-2 px-5 py-1.5 bg-red-950/60 text-red-300 text-sm font-medium rounded-full frozen-pulse">
+                            <i class="fa-solid fa-lock"></i> ACCOUNT FROZEN
                         </div>
                     </div>
-                    <div class="text-right">
-                        <div class="text-emerald-400 text-5xl">🇺🇸</div>
-                    </div>
+                    <div class="text-7xl opacity-80">🇺🇸</div>
+                </div>
+                <div class="mt-6 text-xs text-zinc-500">
+                    Last login: March 18, 2026  7:41 PM WAT  •  Chrome on mobile
                 </div>
             </div>
 
-            <!-- Quick Accounts -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-zinc-900 rounded-3xl p-6 border border-zinc-700 card-hover">
-                    <p class="text-xs text-zinc-400">SAVINGS</p>
-                    <p class="text-3xl font-semibold mt-3">$45,890.12</p>
-                    <p class="text-emerald-400 text-xs mt-4">+2.4% APY</p>
-                </div>
-                <div onclick="showReceiveModal()" class="bg-zinc-900 rounded-3xl p-6 border border-zinc-700 card-hover cursor-pointer">
-                    <p class="text-xs text-zinc-400 flex items-center gap-2">
-                        <i class="fas fa-qrcode"></i> RECEIVE MONEY
-                    </p>
-                    <p class="text-3xl font-semibold mt-3 text-emerald-400">Instant</p>
-                </div>
+            <!-- Quick actions -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                <button onclick="showDepositModal()" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-emerald-700/50 transition active:scale-95 card-hover">
+                    <i class="fa-solid fa-plus-circle text-4xl text-emerald-500 mb-3"></i>
+                    <div class="font-medium">Deposit</div>
+                </button>
+                <button onclick="showSendModal()" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-rose-700/50 transition active:scale-95 card-hover">
+                    <i class="fa-solid fa-paper-plane text-4xl text-rose-500 mb-3"></i>
+                    <div class="font-medium">Send</div>
+                </button>
+                <button onclick="showReceiveModal()" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-sky-700/50 transition active:scale-95 card-hover">
+                    <i class="fa-solid fa-qrcode text-4xl text-sky-400 mb-3"></i>
+                    <div class="font-medium">Receive</div>
+                </button>
+                <button disabled class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center opacity-50 cursor-not-allowed">
+                    <i class="fa-solid fa-credit-card text-4xl text-violet-400 mb-3"></i>
+                    <div class="font-medium">Cards</div>
+                </button>
             </div>
 
-            <!-- Cards Section -->
-            <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
-                <div class="flex justify-between mb-6">
-                    <h3 class="font-semibold">My Cards</h3>
-                    <span class="text-xs bg-zinc-800 px-3 py-1 rounded-xl">VISA</span>
-                </div>
-                <div class="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-3xl p-6 text-white relative h-48 flex flex-col justify-between">
-                    <div class="flex justify-between">
-                        <div class="text-3xl font-bold tracking-widest">•••• •••• •••• 4242</div>
-                    </div>
-                    <div>
-                        <div class="text-sm">Sandra Bullock</div>
-                        <div class="flex justify-between text-xs mt-4">
-                            <div>03/29</div>
-                            <div>VISA</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
-                <div class="flex items-center justify-between mb-6">
+            <!-- Recent activity -->
+            <div class="bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden">
+                <div class="px-6 py-5 border-b border-zinc-800 flex justify-between items-center">
                     <h3 class="font-semibold text-lg">Recent Activity</h3>
-                    <button onclick="showSendModal()" 
-                            class="bg-white text-zinc-950 px-6 py-3 rounded-2xl text-sm font-medium flex items-center gap-2">
-                        <i class="fas fa-paper-plane"></i> Send
-                    </button>
+                    <span class="text-xs bg-zinc-900 px-3 py-1 rounded-full">Last 30 days</span>
                 </div>
-                
-                <div id="transactions-list" class="space-y-6 text-sm">
-                    <!-- Populated by JS -->
-                </div>
+                <div id="tx-list" class="divide-y divide-zinc-800/60"></div>
             </div>
-        </div>
 
-        <!-- Bottom Navigation (Mobile Optimized) -->
-        <div class="fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 z-50 py-3 px-6">
-            <div class="max-w-7xl mx-auto flex justify-around text-xs font-medium">
-                <button onclick="showDepositModal()" class="flex flex-col items-center gap-1 text-emerald-400">
-                    <i class="fas fa-plus-circle text-2xl"></i>
-                    <span>Deposit</span>
+            <!-- Footer trust seals -->
+            <div class="mt-12 text-center text-xs text-zinc-600 space-x-5 sm:space-x-6">
+                <span>SSL Secured</span> <span>•</span>
+                <span>256-bit Encryption</span> <span>•</span>
+                <span>Member FDIC (demo)</span> <span>•</span>
+                <span>Equal Housing Lender</span>
+            </div>
+        </main>
+
+        <!-- Mobile bottom nav -->
+        <div class="fixed bottom-0 inset-x-0 bg-black/90 backdrop-blur-xl border-t border-zinc-800 z-50 py-3 px-6 sm:hidden">
+            <div class="flex justify-around text-xs text-zinc-400">
+                <button onclick="showDepositModal()" class="flex flex-col items-center gap-1 hover:text-emerald-400 transition">
+                    <i class="fa-solid fa-plus-circle text-2xl"></i> Deposit
                 </button>
-                <button onclick="showSendModal()" class="flex flex-col items-center gap-1">
-                    <i class="fas fa-paper-plane text-2xl"></i>
-                    <span>Send</span>
+                <button onclick="showSendModal()" class="flex flex-col items-center gap-1 hover:text-rose-400 transition">
+                    <i class="fa-solid fa-paper-plane text-2xl"></i> Send
                 </button>
-                <button onclick="showReceiveModal()" class="flex flex-col items-center gap-1">
-                    <i class="fas fa-qrcode text-2xl"></i>
-                    <span>Receive</span>
+                <button onclick="showReceiveModal()" class="flex flex-col items-center gap-1 hover:text-sky-400 transition">
+                    <i class="fa-solid fa-qrcode text-2xl"></i> Receive
                 </button>
-                <button onclick="logout()" class="flex flex-col items-center gap-1 text-red-400">
-                    <i class="fas fa-sign-out-alt text-2xl"></i>
-                    <span>Exit</span>
+                <button onclick="logout()" class="flex flex-col items-center gap-1 hover:text-red-400 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i> Exit
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- DEPOSIT MODAL -->
-    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-end sm:items-center justify-center modal">
-        <div class="bg-zinc-900 w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-8">
-            <h3 class="text-2xl font-semibold mb-8">Deposit Funds</h3>
-            <div class="space-y-8">
+    <!-- MODALS -->
+
+    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end sm:items-center justify-center">
+        <div class="bg-zinc-950 w-full max-w-md rounded-t-3xl sm:rounded-3xl p-8 border-t-4 border-emerald-600 modal-enter">
+            <h3 class="text-2xl font-semibold mb-7">Add Funds (Demo)</h3>
+            <div class="space-y-7">
                 <div>
-                    <label class="text-xs text-zinc-400">Amount</label>
-                    <div class="mt-2 relative">
-                        <span class="absolute left-6 top-1/2 text-3xl text-zinc-400">$</span>
-                        <input id="deposit-amount" type="number" step="0.01" 
-                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl py-5 pl-12 text-4xl focus:outline-none" 
-                               placeholder="0.00">
+                    <label class="block text-sm text-zinc-400 mb-2">Amount</label>
+                    <div class="relative">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-4xl text-zinc-600">$</span>
+                        <input id="deposit-amt" type="number" step="0.01" min="1" class="w-full bg-black border border-zinc-800 rounded-xl py-5 pl-14 text-4xl focus:outline-none focus:border-emerald-600/60" placeholder="0.00" />
                     </div>
                 </div>
-                <button onclick="processDeposit()" 
-                        class="w-full bg-emerald-600 py-5 rounded-2xl font-semibold text-lg">Deposit </button>
-                <button onclick="hideDepositModal()" class="w-full text-zinc-400 py-4">Cancel</button>
+                <button onclick="processDeposit()" class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 py-5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
+                    Confirm Deposit
+                </button>
+                <button onclick="hideDepositModal()" class="w-full py-4 text-zinc-400 hover:text-zinc-200 transition">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- SEND MONEY MODAL -->
-    <div id="send-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-end sm:items-center justify-center modal">
-        <div class="bg-zinc-900 w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-8">
-            <h3 class="text-2xl font-semibold mb-6">Send Money</h3>
-            
+    <div id="send-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end sm:items-center justify-center">
+        <div class="bg-zinc-950 w-full max-w-md rounded-t-3xl sm:rounded-3xl p-8 border-t-4 border-rose-600 modal-enter">
+            <h3 class="text-2xl font-semibold mb-6">Send Money (Demo)</h3>
             <div class="space-y-6">
                 <div>
-                    <label class="text-xs text-zinc-400 mb-2 block">Recipient Email or Account</label>
-                    <input id="recipient" type="email" 
-                           class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4" 
-                           placeholder="recipient@email.com">
+                    <label class="block text-sm text-zinc-400 mb-2">Recipient</label>
+                    <input id="send-to" type="email" required class="w-full bg-black border border-zinc-800 rounded-xl px-5 py-4 focus:outline-none focus:border-rose-600/60" placeholder="email@domain.com" />
                 </div>
                 <div>
-                    <label class="text-xs text-zinc-400 mb-2 block">Amount</label>
+                    <label class="block text-sm text-zinc-400 mb-2">Amount</label>
                     <div class="relative">
-                        <span class="absolute left-6 top-1/2 text-3xl text-zinc-400">$</span>
-                        <input id="send-amount" type="number" step="0.01" 
-                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl py-5 pl-12 text-4xl" 
-                               placeholder="0.00">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-4xl text-zinc-600">$</span>
+                        <input id="send-amt" type="number" step="0.01" min="1" required class="w-full bg-black border border-zinc-800 rounded-xl py-5 pl-14 text-4xl focus:outline-none focus:border-rose-600/60" placeholder="0.00" />
                     </div>
                 </div>
-                <div>
-                    <label class="text-xs text-zinc-400 mb-2 block">Memo</label>
-                    <input id="memo" type="text" 
-                           class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4" 
-                           placeholder="For rent">
-                </div>
-                
-                <button onclick="processSend()" 
-                        class="w-full bg-red-600 py-5 rounded-2xl font-semibold text-lg">Send Now</button>
-                <button onclick="hideSendModal()" class="w-full py-4 text-zinc-400">Cancel</button>
+                <button onclick="processSend()" class="w-full bg-rose-600 hover:bg-rose-500 active:bg-rose-700 py-5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
+                    Send Now
+                </button>
+                <button onclick="hideSendModal()" class="w-full py-4 text-zinc-400 hover:text-zinc-200 transition">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- RECEIVE MODAL -->
-    <div id="receive-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-end sm:items-center justify-center modal">
-        <div class="bg-zinc-900 w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-8 text-center">
-            <div class="mx-auto w-20 h-20 bg-emerald-600/10 rounded-full flex items-center justify-center text-6xl mb-6">📲</div>
-            <h3 class="text-2xl font-semibold mb-2">Receive Money</h3>
-            <p class="text-emerald-400 text-xl mb-8">s</p>
-            
-            <div class="bg-zinc-800 rounded-2xl p-6 text-left text-sm mb-8">
-                <div class="flex justify-between py-3 border-b border-zinc-700">
-                    <span class="text-zinc-400">Routing</span>
-                    <span class="font-mono">021000021</span>
+    <div id="receive-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end sm:items-center justify-center">
+        <div class="bg-zinc-950 w-full max-w-md rounded-t-3xl sm:rounded-3xl p-8 modal-enter">
+            <div class="text-center">
+                <div class="w-24 h-24 mx-auto bg-emerald-950/40 rounded-full flex items-center justify-center text-6xl mb-6">📲</div>
+                <h3 class="text-2xl font-semibold mb-3">Receive Money</h3>
+                <p class="text-emerald-400 text-xl font-medium mb-8">Demo Account — Feature in testing</p>
+
+                <div class="bg-black/60 rounded-2xl p-6 text-left text-sm mb-8 divide-y divide-zinc-800/50">
+                    <div class="flex justify-between py-3.5">
+                        <span class="text-zinc-400">Routing number</span>
+                        <span class="font-mono">021000021</span>
+                    </div>
+                    <div class="flex justify-between py-3.5">
+                        <span class="text-zinc-400">Account number</span>
+                        <span class="font-mono">487248724872</span>
+                    </div>
+                    <div class="flex justify-between py-3.5">
+                        <span class="text-zinc-400">Name on account</span>
+                        <span>Sandra Bullock</span>
+                    </div>
                 </div>
-                <div class="flex justify-between py-3 border-b border-zinc-700">
-                    <span class="text-zinc-400">Account</span>
-                    <span class="font-mono">487248724872</span>
-                </div>
-                <div class="flex justify-between py-3">
-                    <span class="text-zinc-400">Name</span>
-                    <span>Sandra Bullock</span>
-                </div>
+
+                <button onclick="hideReceiveModal()" class="w-full bg-zinc-800 hover:bg-zinc-700 py-5 rounded-xl font-medium transition">
+                    Close
+                </button>
             </div>
-            
-            <button onclick="hideReceiveModal()" 
-                    class="w-full bg-zinc-700 py-5 rounded-2xl font-medium">Close</button>
         </div>
     </div>
 
-    <!-- SUCCESS MODAL AFTER SEND -->
-    <div id="success-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center modal">
-        <div class="bg-zinc-900 max-w-md w-full mx-4 rounded-3xl p-10 text-center">
-            <div class="text-6xl mb-6">✅</div>
-            <h2 class="text-3xl font-semibold mb-2">Transaction on Hold </h2>
-            <p class="text-zinc-400 mb-10">Unfreeze Account To Continue</p>
-            
-            <a href="mailto:creditafinityhelpdesk@gmail.com?subject=My Credit Affinity Union Bank Account Is Frozen, I need help Unfreezing It"
-               onclick="hideSuccessModal()" 
-               class="block bg-emerald-600 hover:bg-emerald-500 py-6 rounded-3xl text-xl font-semibold">
-                Click here to contact Support
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-center justify-center">
+        <div class="bg-zinc-950 max-w-md w-full mx-5 rounded-3xl p-10 text-center modal-enter border-t-4 border-emerald-600">
+            <div id="success-emoji" class="text-8xl mb-6">🎉</div>
+            <h2 class="text-3xl font-semibold mb-3">Thank you</h2>
+            <p class="text-zinc-400 mb-10">for exploring the Thiga Bank demo</p>
+
+            <a href="mailto:sofihellpcentrre098@gmail.com?subject=Thiga%20Bank%20Demo%20-%20Feedback&body=I%20have%20reviewed%20the%20demo%20and%20find%20it%20very%20professional%20and%20well%20designed."
+               class="block bg-emerald-600 hover:bg-emerald-500 py-6 rounded-2xl text-xl font-semibold transition transform active:scale-[0.98]">
+                Click here to send feedback / payment
             </a>
-            
-            <button onclick="hideSuccessModal()" class="mt-8 text-zinc-400">Close</button>
+
+            <button onclick="hideSuccessModal()" class="mt-8 text-zinc-400 hover:text-zinc-200 transition">
+                Close demo
+            </button>
         </div>
     </div>
 
     <script>
-        let currentBalance = 345,120.80;
+        let balance = 430056.70;
+        let balanceVisible = true;
 
         const transactions = [
-            {date: "Mar 17", desc: "Payroll Deposit", amt: "+2,450.00", color: "emerald"},
-            {date: "Mar 16", desc: "Starbucks", amt: "-8.75", color: "red"},
-            {date: "Mar 15", desc: "Amazon", amt: "-129.99", color: "red"},
-            {date: "Mar 14", desc: "Rent", amt: "-1,850.00", color: "red"},
-            {date: "Mar 13", desc: "Refund", amt: "+45.00", color: "emerald"}
+            { date:"Mar 17", desc:"Salary deposit",         amt:"+4,820.00", color:"emerald" },
+            { date:"Mar 16", desc:"Coffee & groceries",     amt:"-42.15",    color:"rose"    },
+            { date:"Mar 15", desc:"Online shopping",        amt:"-289.99",   color:"rose"    },
+            { date:"Mar 14", desc:"Rent transfer",          amt:"-2,100.00", color:"rose"    },
+            { date:"Mar 13", desc:"Freelance payment",      amt:"+1,750.00", color:"emerald" }
         ];
 
-        function renderTransactions() {
-            const container = document.getElementById('transactions-list');
-            container.innerHTML = '';
+        function renderTx() {
+            const container = document.getElementById("tx-list");
+            container.innerHTML = "";
             transactions.forEach(t => {
-                const div = document.createElement('div');
-                div.className = 'flex justify-between items-center';
-                div.innerHTML = `
+                const row = document.createElement("div");
+                row.className = "flex justify-between items-center px-6 py-4 hover:bg-zinc-900/40 transition";
+                row.innerHTML = `
                     <div>
-                        <div class="text-xs text-zinc-400">${t.date}</div>
+                        <div class="text-xs text-zinc-500">${t.date}</div>
                         <div class="font-medium">${t.desc}</div>
                     </div>
-                    <div class="text-right">
-                        <span class="font-semibold text-${t.color}-400">${t.amt}</span>
-                    </div>
+                    <span class="font-semibold text-${t.color}-400">${t.amt}</span>
                 `;
-                container.appendChild(div);
+                container.appendChild(row);
             });
         }
 
-        function updateBalance() {
-            document.getElementById('balance-amount').textContent = 
-                '$' + currentBalance.toLocaleString('en-US', {minimumFractionDigits: 2});
+        function animateBalance() {
+            const el = document.getElementById("balance-display");
+            if (!el) return;
+
+            if (!balanceVisible) {
+                el.textContent = "•••••••••";
+                el.classList.remove("shimmer-balance");
+                return;
+            }
+
+            el.classList.add("shimmer-balance");
+            el.textContent = "$" + balance.toLocaleString("en-US", {minimumFractionDigits:2});
+
+            setTimeout(() => el.classList.remove("shimmer-balance"), 2200);
         }
 
-        // Login → Verification
-        document.getElementById('login-form').addEventListener('submit', function(e) {
+        function toggleBalance() {
+            balanceVisible = !balanceVisible;
+            document.getElementById("eye-icon").className = balanceVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+            animateBalance();
+        }
+
+        // ─── Login flow ───────────────────────────────────────
+        document.getElementById("login-form").addEventListener("submit", e => {
             e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const pass = document.getElementById('password').value.trim();
-            
+            const email = document.getElementById("email").value.trim();
+            const pass  = document.getElementById("password").value.trim();
+
             if (email === "Sandrabullocks@gmail.com" && pass === "#Godtrust098") {
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('verification-page').classList.remove('hidden');
+                document.getElementById("login-page").classList.add("hidden");
+                document.getElementById("verification-page").classList.remove("hidden");
             } else {
-                alert("You have Inputed The wrong Credentials, Try Again");
+                alert("Please use the demo credentials exactly as shown.");
             }
         });
 
         function verifyCode() {
-            const code = document.getElementById('verify-code').value.trim();
-            if (code === "705035") {
-                document.getElementById('verification-page').classList.add('hidden');
-                document.getElementById('dashboard-page').classList.remove('hidden');
-                updateBalance();
-                renderTransactions();
+            if (document.getElementById("verify-code").value.trim() === "705035") {
+                document.getElementById("verification-page").classList.add("hidden");
+                document.getElementById("dashboard-page").classList.remove("hidden");
+                animateBalance();
+                renderTx();
             } else {
-                alert("Wrong Code, Try Again");
+                alert("Demo code: 705035");
             }
         }
 
         function backToLogin() {
-            document.getElementById('verification-page').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById("verification-page").classList.add("hidden");
+            document.getElementById("login-page").classList.remove("hidden");
         }
 
-        // Modals
-        function showDepositModal() {
-            document.getElementById('deposit-modal').classList.remove('hidden');
-        }
-        function hideDepositModal() {
-            document.getElementById('deposit-modal').classList.add('hidden');
-        }
+        // ─── Deposit ──────────────────────────────────────────
+        function showDepositModal() { document.getElementById("deposit-modal").classList.remove("hidden"); }
+        function hideDepositModal() { document.getElementById("deposit-modal").classList.add("hidden"); }
+
         function processDeposit() {
-            const amt = parseFloat(document.getElementById('deposit-amount').value);
-            if (amt > 0) {
-                currentBalance += amt;
-                updateBalance();
-                hideDepositModal();
-                alert(`$${amt.toFixed(2)} Cannot be deposited at the moment`);
-            }
+            const amt = parseFloat(document.getElementById("deposit-amt").value);
+            if (!amt || amt <= 0) return alert("Please enter a valid amount greater than $0.");
+            balance += amt;
+            animateBalance();
+            hideDepositModal();
+
+            // fake success burst
+            const successEl = document.getElementById("success-emoji");
+            successEl.textContent = ["🎉","💰","✅","✨"][Math.floor(Math.random()*4)];
+            document.getElementById("success-modal").classList.remove("hidden");
+            setTimeout(() => document.getElementById("success-modal").classList.add("hidden"), 2200);
         }
 
-        function showSendModal() {
-            document.getElementById('send-modal').classList.remove('hidden');
-            document.getElementById('recipient').focus();
-        }
-        function hideSendModal() {
-            document.getElementById('send-modal').classList.add('hidden');
-        }
+        // ─── Send ─────────────────────────────────────────────
+        function showSendModal() { document.getElementById("send-modal").classList.remove("hidden"); }
+        function hideSendModal() { document.getElementById("send-modal").classList.add("hidden"); }
+
         function processSend() {
-            const recipient = document.getElementById('recipient').value.trim();
-            const amount = parseFloat(document.getElementById('send-amount').value);
-            
-            if (!recipient || !amount || amount <= 0) {
-                alert("Please enter a valid recipient email and amount to send.");
-                return;
-            }
-            
+            const to  = document.getElementById("send-to").value.trim();
+            const amt = parseFloat(document.getElementById("send-amt").value);
+
+            if (!to)    return alert("Please enter a recipient.");
+            if (!amt || amt <= 0) return alert("Please enter a valid amount > $0.");
+
             hideSendModal();
-            document.getElementById('success-modal').classList.remove('hidden');
+            document.getElementById("success-modal").classList.remove("hidden");
         }
 
-        function showReceiveModal() {
-            document.getElementById('receive-modal').classList.remove('hidden');
-        }
-        function hideReceiveModal() {
-            document.getElementById('receive-modal').classList.add('hidden');
-        }
-
-        function hideSuccessModal() {
-            document.getElementById('success-modal').classList.add('hidden');
-        }
+        // ─── Receive & success modal ──────────────────────────
+        function showReceiveModal() { document.getElementById("receive-modal").classList.remove("hidden"); }
+        function hideReceiveModal() { document.getElementById("receive-modal").classList.add("hidden"); }
+        function hideSuccessModal() { document.getElementById("success-modal").classList.add("hidden"); }
 
         function logout() {
-            if (confirm("End session?")) {
-                location.reload();
-            }
+            if (confirm("End this demo session?")) location.reload();
         }
 
-        // Keyboard support
-        document.addEventListener('keydown', e => {
-            if (e.key === "Escape") {
-                const modals = ['deposit-modal','send-modal','receive-modal','success-modal'];
-                for (let id of modals) {
-                    const m = document.getElementById(id);
-                    if (!m.classList.contains('hidden')) {
-                        m.classList.add('hidden');
-                        return;
-                    }
-                }
+        // Event listeners
+        document.getElementById("toggle-balance-btn")?.addEventListener("click", toggleBalance);
+
+        document.getElementById("notif-btn")?.addEventListener("click", () => {
+            document.getElementById("notif-dropdown").classList.toggle("hidden");
+        });
+
+        window.addEventListener("click", e => {
+            if (!e.target.closest("#notif-btn")) {
+                document.getElementById("notif-dropdown")?.classList.add("hidden");
             }
         });
 
-        // Tailwind ready + mobile ready
-        window.onload = () => {
-            console.log('%Credit Affinity Union Bank', 'color:#10b981; font-weight:bold');
-        };
+        window.addEventListener("keydown", e => {
+            if (e.key === "Escape") {
+                document.querySelectorAll(".fixed.inset-0:not(.hidden)").forEach(m => m.classList.add("hidden"));
+            }
+        });
     </script>
 </body>
 </html>
