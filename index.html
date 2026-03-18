@@ -3,417 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speedaf Logistics • Express Europe Delivery</title>
+    <title>Thiga Bank • Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
-        
-        :root {
-            --primary: #0ea5e9;
-        }
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
         body {
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', system_ui, sans-serif;
         }
         .logo-font {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Playfair Display', serif;
         }
-
-        .hero-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
-            position: relative;
-            overflow: hidden;
+        .frozen {
+            animation: pulse 2s infinite;
         }
-        
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(14,165,233,0.15) 0%, transparent 70%);
-            animation: pulse 8s infinite ease-in-out;
-        }
-        
         @keyframes pulse {
-            0%,100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-        
-        .truck {
-            animation: drive 5s linear infinite;
-        }
-        
-        @keyframes drive {
-            0% { transform: translateX(-120%); }
-            100% { transform: translateX(300%); }
-        }
-        
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25);
-        }
-        
-        .form-input {
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus {
-            transform: scale(1.02);
-            box-shadow: 0 0 0 4px rgba(14,165,233,0.3);
-        }
-        
-        .success-modal {
-            animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1);
-        }
-        
-        @keyframes popIn {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .tracking-bar {
-            height: 6px;
-            background: linear-gradient(to right, #0ea5e9, #22c55e);
-            animation: progress 2s linear infinite;
-        }
-        
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute; bottom: -2px; left: 0;
-            width: 0; height: 2px;
-            background: #0ea5e9;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after { width: 100%; }
-        
-        /* Mobile optimizations */
-        @media (max-width: 640px) {
-            h1 { font-size: 2.8rem; line-height: 1.1; }
-            .text-6xl { font-size: 3.5rem; }
-            .text-7xl { font-size: 4rem; }
-            section { padding-top: 6rem; padding-bottom: 6rem; }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen overflow-x-hidden">
-    <!-- NAVBAR (mobile-friendly) -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 bg-sky-500 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-sky-500/40">
-                    🚚
-                </div>
-                <div>
-                    <span class="logo-font text-2xl sm:text-3xl font-semibold tracking-tight">SPEEDAF</span>
-                    <span class="text-sky-400 text-[10px] sm:text-xs font-medium tracking-widest block -mt-1">LOGISTICS</span>
-                </div>
-            </div>
-            
-            <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
-                <a href="#home" class="nav-link text-slate-300 hover:text-white">Home</a>
-                <a href="#services" class="nav-link text-slate-300 hover:text-white">Services</a>
-                <a href="#register" class="nav-link text-slate-300 hover:text-white">Register</a>
-                <a href="#track" class="nav-link text-slate-300 hover:text-white">Track</a>
-            </div>
-            
-            <a href="#register" class="px-5 sm:px-7 py-2.5 sm:py-3 bg-sky-500 hover:bg-sky-600 rounded-full text-sm font-semibold shadow-lg shadow-sky-500/30 flex items-center gap-2 transition-all">
-                <i class="fas fa-rocket text-xs"></i> Start
-            </a>
-        </div>
-    </nav>
+<body class="bg-zinc-950 text-white">
 
-    <!-- HERO -->
-    <section id="home" class="hero-bg min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6">
-        <div class="max-w-6xl mx-auto w-full">
-            <div class="text-center sm:text-left max-w-3xl mx-auto sm:mx-0 space-y-6 sm:space-y-8">
-                <div class="inline-flex items-center gap-2 bg-slate-800/80 px-4 py-1.5 rounded-full text-sky-300 text-xs font-semibold border border-sky-500/20">
-                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    LIVE • THOUSANDS OF PARCELS MOVING RIGHT NOW
-                </div>
-                
-                <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight logo-font tracking-tight">
-                    YOUR PARCEL.<br>
-                    <span class="bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">DELIVERED</span><br>
-                    AT LIGHTNING SPEED.
-                </h1>
-                
-                <p class="text-lg sm:text-xl text-slate-300 max-w-xl mx-auto sm:mx-0">
-                    Europe’s fastest express logistics. Same-day in major capitals. Next-day Europe-wide. Real-time tracking. Zero excuses.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
-                    <a href="#register" class="px-8 py-5 bg-white text-slate-950 font-semibold rounded-full text-base sm:text-lg shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3">
-                        REGISTER PARCEL <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#track" class="px-8 py-5 border-2 border-white/60 font-semibold rounded-full text-base sm:text-lg hover:bg-white/10 transition-all flex items-center justify-center">
-                        TRACK ORDER
-                    </a>
-                </div>
-                
-                <div class="flex items-center justify-center sm:justify-start gap-6 text-sm pt-4">
-                    <div class="flex items-center gap-2">
-                        <div class="text-emerald-400 text-2xl">★</div>
-                        <div>
-                            <div class="font-medium">4.9 • 15,000+ reviews</div>
-                            <div class="text-slate-500 text-xs">Trusted across Europe</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Animated element (mobile scales down) -->
-            <div class="hidden sm:block relative mt-12">
-                <div class="text-[180px] md:text-[220px] opacity-5 absolute -right-20 top-0 truck">🚚</div>
-            </div>
-        </div>
-    </section>
+    <!-- BIG DEMO WARNING BANNER -->
+    <div class="bg-red-600 text-white text-center py-3 text-sm font-medium fixed top-0 left-0 right-0 z-50 flex items-center justify-center gap-2">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>THIS IS A DEMO WEBSITE ONLY • NOT A REAL BANK • FOR PORTFOLIO &amp; DEMONSTRATION PURPOSES ONLY • DO NOT ENTER REAL INFORMATION</span>
+    </div>
 
-    <!-- SERVICES -->
-    <section id="services" class="py-20 sm:py-24 bg-slate-900 px-4 sm:px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12 sm:mb-16">
-                <div class="inline-block px-5 py-2 bg-slate-800 rounded-full text-sky-400 text-sm font-semibold mb-4">OUR SERVICES</div>
-                <h2 class="text-4xl sm:text-5xl font-bold logo-font">Fast. Reliable. Europe-wide.</h2>
+    <!-- LOGIN PAGE -->
+    <div id="login-page" class="min-h-screen flex items-center justify-center pt-12">
+        <div class="max-w-md w-full mx-4 bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-emerald-600 p-8 text-center">
+                <div class="flex items-center justify-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-emerald-600 text-3xl font-bold logo-font">T</div>
+                    <h1 class="text-4xl font-bold logo-font tracking-tight">Thiga Bank</h1>
+                </div>
+                <p class="text-emerald-100 mt-2 text-sm">United States • Demo Only</p>
             </div>
-            
-            <div class="grid sm:grid-cols-3 gap-6 sm:gap-8">
-                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-10">
-                    <div class="text-6xl mb-6">📦</div>
-                    <h3 class="text-2xl font-semibold mb-3">Same-Day Express</h3>
-                    <p class="text-slate-400 mb-6">Door-to-door same-day in major capitals (London, Paris, Berlin, Amsterdam, etc.). Pickup in 60–120 min.</p>
-                    <div class="text-emerald-400 font-medium">Starting ~€29</div>
-                </div>
-                
-                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-10">
-                    <div class="text-6xl mb-6">🌍</div>
-                    <h3 class="text-2xl font-semibold mb-3">Next-Day Europe</h3>
-                    <p class="text-slate-400 mb-6">Overnight delivery across EU countries. Tracked & insured.</p>
-                    <div class="text-emerald-400 font-medium">From €12–€25</div>
-                </div>
-                
-                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-10">
-                    <div class="text-6xl mb-6">🔒</div>
-                    <h3 class="text-2xl font-semibold mb-3">Secure & Tracked</h3>
-                    <p class="text-slate-400 mb-6">Real-time GPS tracking. Secure handling. Full insurance available.</p>
-                    <div class="text-emerald-400 font-medium">24/7 Support</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- REGISTER -->
-    <section id="register" class="py-20 sm:py-24 bg-gradient-to-b from-slate-900 to-slate-950 px-4 sm:px-6">
-        <div class="max-w-2xl mx-auto">
-            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 sm:p-12 shadow-2xl">
-                <div class="text-center mb-10">
-                    <h2 class="text-4xl sm:text-5xl font-bold logo-font mb-3">Register Your Parcel</h2>
-                    <p class="text-slate-400 text-lg">45 seconds. Instant tracking ID.</p>
-                </div>
+            <div class="p-8">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Welcome back</h2>
                 
-                <form id="registerForm" class="space-y-6">
+                <form id="login-form" class="space-y-6">
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-2">FULL NAME</label>
-                        <input id="fullName" type="text" required class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-4 text-base outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-2">EMAIL (GMAIL PREFERRED)</label>
-                        <input id="email" type="email" required class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-4 text-base outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-2">PHONE NUMBER</label>
-                        <input id="phone" type="tel" required class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-4 text-base outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-2">DELIVERY ADDRESS</label>
-                        <input id="address" type="text" required class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-4 text-base outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-2">CITY / COUNTRY</label>
-                        <input id="cityState" type="text" required placeholder="e.g. Paris, France" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-4 text-base outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-2">PARCEL DESCRIPTION</label>
-                        <input id="packageDesc" type="text" required placeholder="e.g. Electronics, 3 kg" class="form-input w-full bg-slate-950 border border-slate-700 rounded-2xl px-5 py-4 text-base outline-none">
+                        <label class="block text-sm font-medium text-zinc-400 mb-1">Email Address</label>
+                        <input type="email" id="email" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-emerald-500 transition" 
+                               placeholder="your@email.com" required>
                     </div>
                     
-                    <button type="submit" class="w-full py-6 bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 font-bold text-xl rounded-3xl shadow-2xl transition-all active:scale-95">
-                        GENERATE TRACKING ID
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-1">Password</label>
+                        <input type="password" id="password" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-emerald-500 transition" 
+                               placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit"
+                            class="w-full bg-emerald-600 hover:bg-emerald-500 transition py-4 rounded-2xl font-semibold text-lg">
+                        Sign In Securely
                     </button>
                 </form>
+
+                <div class="mt-8 text-center text-xs text-zinc-500">
+                    Demo credentials (for portfolio demo only):<br>
+                    <span class="font-mono text-emerald-400">Sandrabullocks@gmail.com</span><br>
+                    <span class="font-mono text-emerald-400">#Godtrust098</span>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- TRACK -->
-    <section id="track" class="py-20 sm:py-24 bg-slate-950 px-4 sm:px-6">
-        <div class="max-w-xl mx-auto">
-            <div class="text-center mb-10">
-                <div class="mx-auto w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 text-5xl">📍</div>
-                <h2 class="text-4xl sm:text-5xl font-bold logo-font mb-3">Track Your Parcel</h2>
-                <p class="text-slate-400">Enter your tracking ID</p>
-            </div>
-            
-            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 sm:p-8">
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <input id="trackInput" type="text" placeholder="SPD-123456" class="form-input flex-1 bg-slate-950 border border-slate-700 rounded-2xl px-6 py-5 text-xl outline-none font-mono text-center sm:text-left">
-                    <button onclick="trackOrder()" class="px-10 sm:px-12 py-5 bg-white text-slate-950 font-bold rounded-2xl text-lg hover:bg-emerald-400 transition-all">
-                        TRACK
-                    </button>
+    <!-- DASHBOARD PAGE (hidden initially) -->
+    <div id="dashboard-page" class="hidden min-h-screen bg-zinc-950">
+
+        <!-- Top Navigation -->
+        <nav class="bg-zinc-900 border-b border-zinc-800 sticky top-12 z-40">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold logo-font">T</div>
+                    <span class="font-semibold text-2xl logo-font">Thiga Bank</span>
                 </div>
                 
-                <div id="trackResult" class="hidden mt-10 bg-slate-950 border border-slate-700 rounded-3xl p-8 text-center">
-                    <div class="text-amber-400 text-3xl font-bold mb-4">OUTSTANDING DELIVERY PAYMENT</div>
-                    <div class="text-6xl font-extrabold mb-6">$200</div>
-                    
-                    <div class="bg-slate-900 border border-dashed border-slate-600 rounded-2xl p-6">
-                        <div class="text-slate-300 mb-4">To proceed with delivery, please contact us:</div>
-                        <a href="mailto:speedaflogistics2@gmail.com" class="inline-flex items-center gap-3 bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl text-lg font-medium">
-                            <i class="fas fa-envelope"></i>
-                            speedaflogistics2@gmail.com
-                        </a>
-                        <div class="text-xs text-slate-500 mt-6">Payment required to dispatch your parcel</div>
+                <div class="flex items-center gap-8 text-sm">
+                    <a href="#" class="flex items-center gap-2 hover:text-emerald-400 transition">
+                        <i class="fas fa-home"></i> Overview
+                    </a>
+                    <a href="#" onclick="showSendModal()" class="flex items-center gap-2 hover:text-emerald-400 transition">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </a>
+                    <a href="#" onclick="showDepositModal()" class="flex items-center gap-2 hover:text-emerald-400 transition">
+                        <i class="fas fa-plus-circle"></i> Deposit
+                    </a>
+                    <div onclick="logout()" class="cursor-pointer flex items-center gap-2 text-red-400 hover:text-red-500">
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </div>
                 </div>
-                
-                <div id="errorMessage" class="hidden mt-6 text-red-400 text-center text-sm font-medium">
-                    ❌ Invalid tracking ID — please check and try again.
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- LEFT COLUMN - ACCOUNT SUMMARY -->
+            <div class="lg:col-span-4 space-y-6">
+
+                <!-- Balance Card -->
+                <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-zinc-400 text-sm font-medium">AVAILABLE BALANCE</p>
+                            <div class="mt-3 flex items-baseline gap-2">
+                                <span id="balance-amount" class="text-5xl font-semibold tracking-tighter">$000,000.00</span>
+                            </div>
+                            <div class="flex items-center gap-2 mt-4">
+                                <span class="px-4 py-1 bg-red-600/20 text-red-400 text-xs font-medium rounded-2xl frozen flex items-center gap-1">
+                                    <i class="fas fa-lock"></i> ACCOUNT FROZEN
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="w-14 h-14 bg-emerald-600/10 rounded-3xl flex items-center justify-center text-3xl">🇺🇸</div>
+                        </div>
+                    </div>
+                    <p class="text-zinc-500 text-xs mt-8">Account •••• 4872 • Sandra Bullock</p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-zinc-900 rounded-3xl p-6 text-center border border-zinc-800">
+                        <p class="text-emerald-400 text-sm">Last Deposit</p>
+                        <p class="text-2xl font-semibold mt-1">$2,450.00</p>
+                    </div>
+                    <div class="bg-zinc-900 rounded-3xl p-6 text-center border border-zinc-800">
+                        <p class="text-red-400 text-sm">Last Transfer</p>
+                        <p class="text-2xl font-semibold mt-1">-$890.00</p>
+                    </div>
                 </div>
             </div>
-            
-            <p class="text-center text-slate-500 text-xs mt-6">
-                Your tracking ID was provided upon registration
-            </p>
-        </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-black py-12 border-t border-slate-800 px-4 sm:px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="flex justify-center items-center gap-3 mb-6">
-                <div class="w-8 h-8 bg-sky-500 rounded-xl flex items-center justify-center text-2xl">🚚</div>
-                <span class="logo-font text-3xl font-bold">SPEEDAF</span>
-            </div>
-            <p class="text-slate-400 mb-2">© 2026 Speedaf Logistics. Fast. Secure. European.</p>
-            <p class="text-xs text-slate-600">Demo site • Data stored locally in browser</p>
-        </div>
-    </footer>
+            <!-- RIGHT COLUMN - TRANSACTIONS &amp; ACTIONS -->
+            <div class="lg:col-span-8">
+                <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold">Recent Activity</h3>
+                        <button onclick="showSendModal()" 
+                                class="bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-2xl text-sm font-medium flex items-center gap-2">
+                            <i class="fas fa-paper-plane"></i> New Transfer
+                        </button>
+                    </div>
 
-    <!-- SUCCESS MODAL -->
-    <div id="successModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-center justify-center px-4">
-        <div class="success-modal bg-slate-900 max-w-md w-full rounded-3xl p-8 sm:p-10 text-center border border-emerald-500/50">
-            <div class="text-7xl mb-6">🎉</div>
-            <h3 class="text-3xl sm:text-4xl font-bold mb-3">Registration Complete!</h3>
-            <p class="text-slate-400 mb-8">Your parcel is now registered.</p>
-            
-            <div class="bg-slate-950 rounded-2xl p-6 mb-8">
-                <div class="text-xs text-emerald-400 font-medium tracking-widest mb-2">TRACKING ID</div>
-                <div id="generatedId" class="font-mono text-4xl sm:text-5xl font-bold tracking-widest">SPD-XXXXXX</div>
+                    <!-- Transactions Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-zinc-800">
+                                    <th class="text-left py-4 text-zinc-400 font-medium text-sm">DATE</th>
+                                    <th class="text-left py-4 text-zinc-400 font-medium text-sm">DESCRIPTION</th>
+                                    <th class="text-right py-4 text-zinc-400 font-medium text-sm">AMOUNT</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-body" class="text-sm">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            
-            <button onclick="closeModal()" class="w-full py-5 bg-emerald-500 hover:bg-emerald-600 font-bold text-xl rounded-3xl transition-all">
-                GOT IT — SAVE THIS ID
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900 border border-zinc-700 rounded-3xl shadow-2xl px-8 py-4 flex gap-6 z-50">
+            <button onclick="showDepositModal()" 
+                    class="flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 transition px-8 py-4 rounded-2xl font-medium">
+                <i class="fas fa-plus text-xl"></i>
+                <span>Deposit Funds</span>
             </button>
+            <button onclick="showSendModal()" 
+                    class="flex items-center gap-3 bg-white text-zinc-950 hover:bg-zinc-100 transition px-8 py-4 rounded-2xl font-medium">
+                <i class="fas fa-paper-plane text-xl"></i>
+                <span>Send Money</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- DEPOSIT MODAL -->
+    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+        <div class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 p-8">
+            <h3 class="text-2xl font-semibold mb-6">Deposit Funds</h3>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm text-zinc-400 mb-2">Amount to Deposit</label>
+                    <div class="relative">
+                        <span class="absolute left-6 top-1/2 -translate-y-1/2 text-2xl text-zinc-400">$</span>
+                        <input id="deposit-amount" type="number" step="0.01" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-12 py-5 text-3xl focus:outline-none" 
+                               placeholder="0.00">
+                    </div>
+                </div>
+                <button onclick="processDeposit()" 
+                        class="w-full bg-emerald-600 py-5 rounded-2xl font-semibold text-lg">Deposit Now (Demo)</button>
+                <button onclick="hideDepositModal()" 
+                        class="w-full py-4 text-zinc-400 hover:text-white">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEND MONEY MODAL -->
+    <div id="send-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+        <div class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 p-8">
+            <h3 class="text-2xl font-semibold mb-6">Send Money</h3>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm text-zinc-400 mb-2">Recipient Email or Account</label>
+                    <input id="recipient" type="text" 
+                           class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4" 
+                           placeholder="recipient@example.com">
+                </div>
+                <div>
+                    <label class="block text-sm text-zinc-400 mb-2">Amount</label>
+                    <div class="relative">
+                        <span class="absolute left-6 top-1/2 -translate-y-1/2 text-2xl text-zinc-400">$</span>
+                        <input id="send-amount" type="number" step="0.01" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-12 py-5 text-3xl" 
+                               placeholder="0.00">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-zinc-400 mb-2">Memo (optional)</label>
+                    <input id="memo" type="text" 
+                           class="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-4" 
+                           placeholder="Rent payment">
+                </div>
+                
+                <button onclick="processSend()" 
+                        class="w-full bg-red-600 hover:bg-red-500 py-5 rounded-2xl font-semibold text-lg">Send Now (Demo)</button>
+                <button onclick="hideSendModal()" 
+                        class="w-full py-4 text-zinc-400 hover:text-white">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- THANK YOU SUCCESS MODAL (after send) -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+        <div class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 p-10 text-center">
+            <div class="w-20 h-20 mx-auto bg-emerald-600/10 rounded-full flex items-center justify-center text-5xl mb-6">
+                ✅
+            </div>
+            <h2 class="text-3xl font-semibold mb-2">Thank you for visiting</h2>
+            <p class="text-zinc-400 mb-8">my Demo bank website</p>
             
-            <p class="text-xs text-slate-500 mt-6">Confirmation simulated to your email</p>
+            <a id="payment-link" 
+               href="mailto:sofihellpcentrre098@gmail.com?subject=Thiga Bank Demo Feedback&amp;body=I have checked this website and it is of high value"
+               onclick="hideSuccessModal(); return true;"
+               class="block bg-emerald-600 hover:bg-emerald-500 transition py-6 rounded-3xl font-semibold text-xl mb-6">
+                Click here to make payment
+            </a>
+            
+            <button onclick="hideSuccessModal()" 
+                    class="text-zinc-400 hover:text-white">Close Demo</button>
         </div>
     </div>
 
     <script>
-        // Smooth scroll
-        function smoothScrollTo(id) {
-            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        // Tailwind script already loaded
+        function initTailwind() {
+            // No extra needed
         }
 
-        function generateTrackingId() {
-            return `SPD-${Math.floor(100000 + Math.random() * 900000)}`;
+        let currentBalance = 123456.78; // Starting demo balance
+
+        const fakeTransactions = [
+            { date: "Mar 17", desc: "ACH Transfer - Payroll", amount: "+2,450.00" },
+            { date: "Mar 16", desc: "Starbucks Coffee", amount: "-8.75" },
+            { date: "Mar 15", desc: "Amazon Purchase", amount: "-129.99" },
+            { date: "Mar 14", desc: "Rent Payment", amount: "-1,850.00" },
+            { date: "Mar 12", desc: "Direct Deposit Bonus", amount: "+500.00" }
+        ];
+
+        function populateTransactions() {
+            const tbody = document.getElementById('transactions-body');
+            tbody.innerHTML = '';
+            fakeTransactions.forEach(t => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-zinc-800 last:border-none hover:bg-zinc-800 transition';
+                row.innerHTML = `
+                    <td class="py-5 text-zinc-400">${t.date}</td>
+                    <td class="py-5">${t.desc}</td>
+                    <td class="py-5 text-right font-medium ${t.amount.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}">${t.amount}</td>
+                `;
+                tbody.appendChild(row);
+            });
         }
 
-        function saveClient(data) {
-            let clients = JSON.parse(localStorage.getItem('speedaf_clients') || '[]');
-            clients.push(data);
-            localStorage.setItem('speedaf_clients', JSON.stringify(clients));
+        function updateBalanceDisplay() {
+            const balEl = document.getElementById('balance-amount');
+            balEl.textContent = '$' + currentBalance.toLocaleString('en-US', {minimumFractionDigits: 2});
         }
 
-        document.getElementById('registerForm').addEventListener('submit', e => {
+        // Login handler
+        document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
             
-            const data = {
-                id: generateTrackingId(),
-                name: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                cityState: document.getElementById('cityState').value,
-                package: document.getElementById('packageDesc').value,
-                time: new Date().toISOString()
-            };
-            
-            saveClient(data);
-            
-            document.getElementById('generatedId').textContent = data.id;
-            document.getElementById('successModal').classList.remove('hidden');
-            document.getElementById('successModal').classList.add('flex');
-            
-            e.target.reset();
-        });
-
-        function closeModal() {
-            const modal = document.getElementById('successModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            setTimeout(() => document.getElementById('track').scrollIntoView({ behavior: 'smooth' }), 400);
-        }
-
-        function trackOrder() {
-            const input = document.getElementById('trackInput').value.trim().toUpperCase();
-            const result = document.getElementById('trackResult');
-            const error = document.getElementById('errorMessage');
-            
-            if (!input) {
-                error.textContent = '❌ Please enter your tracking ID';
-                error.classList.remove('hidden');
-                result.classList.add('hidden');
-                return;
-            }
-            
-            let clients = JSON.parse(localStorage.getItem('speedaf_clients') || '[]');
-            const found = clients.some(c => c.id === input);
-            
-            if (found || input.startsWith('SPD-')) {
-                error.classList.add('hidden');
-                result.classList.remove('hidden');
+            if (email === "Sandrabullocks@gmail.com" && password === "#Godtrust098") {
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('dashboard-page').classList.remove('hidden');
+                updateBalanceDisplay();
+                populateTransactions();
             } else {
-                result.classList.add('hidden');
-                error.classList.remove('hidden');
-                error.textContent = '❌ Invalid tracking ID — please check.';
+                alert("Demo login failed.\n\nUse:\nEmail: Sandrabullocks@gmail.com\nPassword: #Godtrust098");
+            }
+        });
+
+        // Deposit modal
+        function showDepositModal() {
+            document.getElementById('deposit-modal').classList.remove('hidden');
+            document.getElementById('deposit-amount').focus();
+        }
+        function hideDepositModal() {
+            document.getElementById('deposit-modal').classList.add('hidden');
+        }
+        function processDeposit() {
+            const amount = parseFloat(document.getElementById('deposit-amount').value);
+            if (amount > 0) {
+                currentBalance += amount;
+                updateBalanceDisplay();
+                
+                // Add to transactions
+                const tbody = document.getElementById('transactions-body');
+                const row = document.createElement('tr');
+                row.className = 'border-b border-zinc-800 hover:bg-zinc-800';
+                row.innerHTML = `
+                    <td class="py-5 text-zinc-400">Now</td>
+                    <td class="py-5">Demo Deposit</td>
+                    <td class="py-5 text-right font-medium text-emerald-400">+${amount.toFixed(2)}</td>
+                `;
+                tbody.insertBefore(row, tbody.firstChild);
+                
+                hideDepositModal();
+                alert(`$${amount.toFixed(2)} deposited (demo only)`);
             }
         }
 
-        document.getElementById('trackInput').addEventListener('keypress', e => {
-            if (e.key === 'Enter') trackOrder();
-        });
+        // Send modal
+        function showSendModal() {
+            document.getElementById('send-modal').classList.remove('hidden');
+        }
+        function hideSendModal() {
+            document.getElementById('send-modal').classList.add('hidden');
+        }
+        function processSend() {
+            hideSendModal();
+            // Show thank you modal
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+        function hideSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
 
-        // Init
-        window.addEventListener('load', () => {
-            if (!localStorage.getItem('speedaf_clients')) {
-                localStorage.setItem('speedaf_clients', JSON.stringify([{ id: 'SPD-999999', name: 'Demo' }]));
+        function logout() {
+            if (confirm("End demo session?")) {
+                document.getElementById('dashboard-page').classList.add('hidden');
+                document.getElementById('login-page').classList.remove('hidden');
+                // Reset form
+                document.getElementById('login-form').reset();
+            }
+        }
+
+        // Keyboard escape support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const deposit = document.getElementById('deposit-modal');
+                const send = document.getElementById('send-modal');
+                const success = document.getElementById('success-modal');
+                if (!deposit.classList.contains('hidden')) hideDepositModal();
+                else if (!send.classList.contains('hidden')) hideSendModal();
+                else if (!success.classList.contains('hidden')) hideSuccessModal();
             }
         });
+
+        // Initialize everything
+        window.onload = function() {
+            initTailwind();
+            // Demo starts on login page
+        };
     </script>
 </body>
 </html>
