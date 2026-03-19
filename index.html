@@ -1,510 +1,563 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Credit Affinity Union Bank </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedaf Logistics • Lightning-Fast Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
         :root {
-            --bg: #050505;
-            --card: #0f0f0f;
-            --border: #1a1a1a;
-            --text: #f5f5f5;
-            --muted: #9ca3af;
-            --accent: #10b981;
+            --primary: #0ea5e9;
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+            position: relative;
+            overflow: hidden;
         }
-
-        .logo-font { font-family: 'Playfair Display', serif; }
-
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            animation: pulse 8s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .truck {
+            animation: drive 4s linear infinite;
+        }
+        
+        @keyframes drive {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(300px); }
+        }
+        
         .card-hover {
-            transition: all 0.22s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
         .card-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.4);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25);
         }
-
-        .shimmer-balance {
-            background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer-text 2.2s infinite;
+        
+        .form-input {
+            transition: all 0.3s ease;
         }
-        @keyframes shimmer-text {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        
+        .form-input:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.3);
         }
-
-        .skeleton {
-            background: linear-gradient(90deg, #111 0%, #1a1a1a 50%, #111 100%);
-            background-size: 200% 100%;
-            animation: loading 1.6s infinite;
+        
+        .success-modal {
+            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        @keyframes loading {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
-
-        .frozen-pulse {
-            animation: frozen 2.4s infinite ease-in-out;
+        
+        .tracking-bar {
+            height: 6px;
+            background: linear-gradient(to right, #0ea5e9, #22c55e);
+            animation: progress 2s linear infinite;
         }
-        @keyframes frozen {
-            0%,100% { opacity: 0.9; }
-            50%     { opacity: 0.55; }
+        
+        .nav-link {
+            position: relative;
         }
-
-        .modal-enter {
-            animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0ea5e9;
+            transition: width 0.3s ease;
         }
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.94) translateY(12px); }
-            to   { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        @media (max-width: 640px) {
-            .balance-display { font-size: 2.6rem; line-height: 1; }
+        
+        .nav-link:hover::after {
+            width: 100%;
         }
     </style>
 </head>
-<body>
-
-    </div>
-
-    <!-- LOGIN -->
-    <div id="login-page" class="min-h-screen flex items-center justify-center pt-16 px-5">
-        <div class="w-full max-w-md bg-black/60 backdrop-blur-xl border border-zinc-800/70 rounded-3xl shadow-2xl overflow-hidden">
-            <div class="bg-gradient-to-br from-emerald-800 to-emerald-950 p-10 text-center">
-                <div class="flex justify-center items-center gap-3 mb-2">
-                    <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-emerald-800 text-4xl font-bold logo-font shadow-lg">T</div>
-                    <h1 class="text-5xl font-bold logo-font tracking-tight text-white">Credit Affinity Union </h1>
-                </div>
-                <p class="text-emerald-100/70 text-sm"> Banking Experience</p>
-            </div>
-
-            <div class="p-9">
-                <h2 class="text-2xl font-semibold text-center mb-2">Welcome back</h2>
-                <p class="text-center text-zinc-400 text-sm mb-8">Sign in to view your accounts</p>
-
-                <form id="login-form" class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-medium text-zinc-400 mb-1.5">Email address</label>
-                        <input id="email" type="email" required autocomplete="email"
-                               class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/30 transition"
-                               />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-zinc-400 mb-1.5">Password</label>
-                        <input id="password" type="password" required autocomplete="current-password"
-                               class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/30 transition"
-                               placeholder="••••••••" />
-                    </div>
-                    <button type="submit"
-                            class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 py-4.5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
-                        Sign In
-                    </button>
-                </form>
-
-                <div class="mt-8 text-center text-xs text-zinc-500">
-                    credentials<br>
-                    <span class="font-mono bg-zinc-900 px-2 py-0.5 rounded">Sandrabullocks@gmail.com</span><br>
-                    <span class="font-mono bg-zinc-900 px-2 py-0.5 rounded">#Godtrust098</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2FA -->
-    <div id="verification-page" class="hidden min-h-screen flex items-center justify-center pt-16 px-5 bg-black">
-        <div class="w-full max-w-md bg-black/60 backdrop-blur-xl border border-zinc-800/70 rounded-3xl p-10 shadow-2xl">
-            <div class="text-center mb-10">
-                <div class="w-20 h-20 mx-auto bg-emerald-950/40 rounded-full flex items-center justify-center text-5xl mb-6">🔐</div>
-                <h2 class="text-2xl font-semibold mb-2">Verification Required</h2>
-                <p class="text-zinc-400 text-sm">Enter the 6-digit code sent to your device</p>
-            </div>
-
-            <div class="space-y-8">
-                <input id="verify-code" type="text" maxlength="6" inputmode="numeric" pattern="\d{6}" autocomplete="one-time-code"
-                       class="w-full text-center text-5xl tracking-[1.4em] bg-zinc-900 border border-zinc-700 rounded-xl py-6 focus:outline-none focus:border-emerald-500/60 font-mono"
-                       placeholder="******" />
-
-                <button onclick="verifyCode()"
-                        class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 py-4.5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
-                    Verify
-                </button>
-
-                <button onclick="backToLogin()" class="w-full text-zinc-400 hover:text-zinc-200 text-sm py-3 transition">
-                    ← Back to sign in
-                </button>
-            </div>
-
-            <div class="mt-10 text-center text-xs text-zinc-500">
-                For demo: <span class="font-mono bg-zinc-900 px-2 py-1 rounded">705035</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div id="dashboard-page" class="hidden min-h-screen bg-black pb-32">
-
-        <!-- Top bar -->
-        <nav class="bg-black/70 backdrop-blur-xl border-b border-zinc-800/50 sticky top-14 z-40">
-            <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-emerald-800 rounded-2xl flex items-center justify-center text-white font-bold logo-font text-2xl shadow">T</div>
-                    <span class="text-2xl font-semibold logo-font tracking-tight">Credit Affinity Union  Bank</span>
-                </div>
-                <div class="flex items-center gap-6">
-                    <div class="relative">
-                        <button id="notif-btn" class="text-zinc-300 hover:text-white transition relative">
-                            <i class="fa-solid fa-bell text-xl"></i>
-                            <span class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center ring-2 ring-black">1</span>
-                        </button>
-                        <div id="notif-dropdown" class="hidden absolute right-0 mt-3 w-80 bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden z-50">
-                            <div class="p-4 border-b border-zinc-800">
-                                <div class="flex items-start gap-3">
-                                    <div class="text-2xl">⚠️</div>
-                                    <div>
-                                        <p class="font-medium">New device login detected</p>
-                                        <p class="text-sm text-zinc-400 mt-1">******, USA • Chrome • Today</p>
-                                        <button class="text-xs text-emerald-400 hover:underline mt-2">Review activity</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="logout()" class="text-red-400 hover:text-red-300 text-sm font-medium flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <main class="max-w-6xl mx-auto px-5 pt-8">
-
-            <!-- Balance -->
-            <div class="bg-gradient-to-br from-zinc-950 to-black border border-zinc-800/60 rounded-3xl p-8 mb-7 shadow-2xl card-hover">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <div class="flex items-center gap-3 text-sm text-zinc-400">
-                            <span>CHECKING •••• 4872</span>
-                            <button id="toggle-balance-btn" class="text-zinc-500 hover:text-zinc-300 transition">
-                                <i id="eye-icon" class="fa-solid fa-eye-slash"></i>
-                            </button>
-                        </div>
-                        <div class="mt-5">
-                            <span id="balance-display" class="block text-5xl sm:text-6xl font-semibold tracking-tight">$430,056.70</span>
-                        </div>
-                        <div class="mt-5 inline-flex items-center gap-2 px-5 py-1.5 bg-red-950/60 text-red-300 text-sm font-medium rounded-full frozen-pulse">
-                            <i class="fa-solid fa-lock"></i> ACCOUNT FROZEN
-                        </div>
-                    </div>
-                    <div class="text-7xl opacity-80">🇺🇸</div>
-                </div>
-                <div class="mt-6 text-xs text-zinc-500">
-                    Last login: March 18, 2026  7:41 PM WAT  •  Chrome on mobile
-                </div>
-            </div>
-
-            <!-- Quick actions -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                <button onclick="showDepositModal()" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-emerald-700/50 transition active:scale-95 card-hover">
-                    <i class="fa-solid fa-plus-circle text-4xl text-emerald-500 mb-3"></i>
-                    <div class="font-medium">Deposit</div>
-                </button>
-                <button onclick="showSendModal()" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-rose-700/50 transition active:scale-95 card-hover">
-                    <i class="fa-solid fa-paper-plane text-4xl text-rose-500 mb-3"></i>
-                    <div class="font-medium">Send</div>
-                </button>
-                <button onclick="showReceiveModal()" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center hover:border-sky-700/50 transition active:scale-95 card-hover">
-                    <i class="fa-solid fa-qrcode text-4xl text-sky-400 mb-3"></i>
-                    <div class="font-medium">Receive</div>
-                </button>
-                <button disabled class="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 text-center opacity-50 cursor-not-allowed">
-                    <i class="fa-solid fa-credit-card text-4xl text-violet-400 mb-3"></i>
-                    <div class="font-medium">Cards</div>
-                </button>
-            </div>
-
-            <!-- Recent activity -->
-            <div class="bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden">
-                <div class="px-6 py-5 border-b border-zinc-800 flex justify-between items-center">
-                    <h3 class="font-semibold text-lg">Recent Activity</h3>
-                    <span class="text-xs bg-zinc-900 px-3 py-1 rounded-full">Last 30 days</span>
-                </div>
-                <div id="tx-list" class="divide-y divide-zinc-800/60"></div>
-            </div>
-
-            <!-- Footer trust seals -->
-            <div class="mt-12 text-center text-xs text-zinc-600 space-x-5 sm:space-x-6">
-                <span>SSL Secured</span> <span>•</span>
-                <span>256-bit Encryption</span> <span>•</span>
-                <span>Member FDIC </span> <span>•</span>
-                <span>Equal Housing Lender</span>
-            </div>
-        </main>
-
-        <!-- Mobile bottom nav -->
-        <div class="fixed bottom-0 inset-x-0 bg-black/90 backdrop-blur-xl border-t border-zinc-800 z-50 py-3 px-6 sm:hidden">
-            <div class="flex justify-around text-xs text-zinc-400">
-                <button onclick="showDepositModal()" class="flex flex-col items-center gap-1 hover:text-emerald-400 transition">
-                    <i class="fa-solid fa-plus-circle text-2xl"></i> Deposit
-                </button>
-                <button onclick="showSendModal()" class="flex flex-col items-center gap-1 hover:text-rose-400 transition">
-                    <i class="fa-solid fa-paper-plane text-2xl"></i> Send
-                </button>
-                <button onclick="showReceiveModal()" class="flex flex-col items-center gap-1 hover:text-sky-400 transition">
-                    <i class="fa-solid fa-qrcode text-2xl"></i> Receive
-                </button>
-                <button onclick="logout()" class="flex flex-col items-center gap-1 hover:text-red-400 transition">
-                    <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i> Exit
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODALS -->
-
-    <div id="deposit-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end sm:items-center justify-center">
-        <div class="bg-zinc-950 w-full max-w-md rounded-t-3xl sm:rounded-3xl p-8 border-t-4 border-emerald-600 modal-enter">
-            <h3 class="text-2xl font-semibold mb-7">Add Funds</h3>
-            <div class="space-y-7">
-                <div>
-                    <label class="block text-sm text-zinc-400 mb-2">Amount</label>
-                    <div class="relative">
-                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-4xl text-zinc-600">$</span>
-                        <input id="deposit-amt" type="number" step="0.01" min="1" class="w-full bg-black border border-zinc-800 rounded-xl py-5 pl-14 text-4xl focus:outline-none focus:border-emerald-600/60" placeholder="0.00" />
-                    </div>
-                </div>
-                <button onclick="processDeposit()" class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 py-5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
-                    Confirm Deposit
-                </button>
-                <button onclick="hideDepositModal()" class="w-full py-4 text-zinc-400 hover:text-zinc-200 transition">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="send-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end sm:items-center justify-center">
-        <div class="bg-zinc-950 w-full max-w-md rounded-t-3xl sm:rounded-3xl p-8 border-t-4 border-rose-600 modal-enter">
-            <h3 class="text-2xl font-semibold mb-6">Send Money </h3>
-            <div class="space-y-6">
-                <div>
-                    <label class="block text-sm text-zinc-400 mb-2">Recipient</label>
-                    <input id="send-to" type="email" required class="w-full bg-black border border-zinc-800 rounded-xl px-5 py-4 focus:outline-none focus:border-rose-600/60" placeholder="email@domain.com" />
+<body class="tail-container bg-slate-950 text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-sky-500 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-sky-500/50">
+                    🚚
                 </div>
                 <div>
-                    <label class="block text-sm text-zinc-400 mb-2">Amount</label>
-                    <div class="relative">
-                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-4xl text-zinc-600">$</span>
-                        <input id="send-amt" type="number" step="0.01" min="1" required class="w-full bg-black border border-zinc-800 rounded-xl py-5 pl-14 text-4xl focus:outline-none focus:border-rose-600/60" placeholder="0.00" />
-                    </div>
+                    <span class="logo-font text-3xl font-semibold tracking-tighter text-white">SPEEDAF</span>
+                    <span class="text-sky-400 text-xs font-medium tracking-[3px] block -mt-1">LOGISTICS</span>
                 </div>
-                <button onclick="processSend()" class="w-full bg-rose-600 hover:bg-rose-500 active:bg-rose-700 py-5 rounded-xl font-semibold text-lg transition transform active:scale-[0.98]">
-                    Send Now
-                </button>
-                <button onclick="hideSendModal()" class="w-full py-4 text-zinc-400 hover:text-zinc-200 transition">Cancel</button>
             </div>
-        </div>
-    </div>
-
-    <div id="receive-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end sm:items-center justify-center">
-        <div class="bg-zinc-950 w-full max-w-md rounded-t-3xl sm:rounded-3xl p-8 modal-enter">
-            <div class="text-center">
-                <div class="w-24 h-24 mx-auto bg-emerald-950/40 rounded-full flex items-center justify-center text-6xl mb-6">📲</div>
-                <h3 class="text-2xl font-semibold mb-3">Receive Money</h3>
-                <p class="text-emerald-400 text-xl font-medium mb-8">Account</p>
-
-                <div class="bg-black/60 rounded-2xl p-6 text-left text-sm mb-8 divide-y divide-zinc-800/50">
-                    <div class="flex justify-between py-3.5">
-                        <span class="text-zinc-400">Routing number</span>
-                        <span class="font-mono">021000021</span>
-                    </div>
-                    <div class="flex justify-between py-3.5">
-                        <span class="text-zinc-400">Account number</span>
-                        <span class="font-mono">487248724872</span>
-                    </div>
-                    <div class="flex justify-between py-3.5">
-                        <span class="text-zinc-400">Name on account</span>
-                        <span>Sandra Bullock</span>
-                    </div>
-                </div>
-
-                <button onclick="hideReceiveModal()" class="w-full bg-zinc-800 hover:bg-zinc-700 py-5 rounded-xl font-medium transition">
-                    Close
-                </button>
+            
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#home" onclick="smoothScrollTo('home')" class="nav-link text-slate-300 hover:text-white">HOME</a>
+                <a href="#services" onclick="smoothScrollTo('services')" class="nav-link text-slate-300 hover:text-white">SERVICES</a>
+                <a href="#register" onclick="smoothScrollTo('register')" class="nav-link text-slate-300 hover:text-white">REGISTER</a>
+                <a href="#track" onclick="smoothScrollTo('track')" class="nav-link text-slate-300 hover:text-white">TRACK</a>
             </div>
-        </div>
-    </div>
-
-    <div id="success-modal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-center justify-center">
-        <div class="bg-zinc-950 max-w-md w-full mx-5 rounded-3xl p-10 text-center modal-enter border-t-4 border-emerald-600">
-            <div id="pause-emoji" class="text-8xl mb-6">⏸</div>
-            <h2 class="text-3xl font-semibold mb-3">Transfer On Hold</h2>
-            <p class="text-zinc-400 mb-10"> contact customer Support To unlock your Account</p>
-
-            <a href="mailto:creditafinityhelpdesk@gmail.com?subject=I Need Help Unfreezing My Accout."
-               class="block bg-emerald-600 hover:bg-emerald-500 py-6 rounded-2xl text-xl font-semibold transition transform active:scale-[0.98]">
-                Click here to Contact Help Centre
+            
+            <a href="#register" onclick="smoothScrollTo('register')" 
+               class="px-8 py-3.5 bg-sky-500 hover:bg-sky-600 transition-all font-semibold rounded-3xl text-sm shadow-xl shadow-sky-500/30 flex items-center gap-x-2">
+                <i class="fas fa-rocket"></i>
+                GET STARTED
             </a>
+        </div>
+    </nav>
 
-            <button onclick="hideSuccessModal()" class="mt-8 text-zinc-400 hover:text-zinc-200 transition">
-                Close
+    <!-- HERO -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-x-2 bg-slate-800 text-sky-400 text-xs font-bold px-5 py-2 rounded-3xl border border-sky-500/30">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    LIVE • 2,847 DELIVERIES TODAY
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold leading-none tracking-tighter logo-font">
+                    YOUR PACKAGE.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">DELIVERED</span><br>
+                    IN RECORD TIME.
+                </h1>
+                
+                <p class="text-xl text-slate-400 max-w-lg">
+                    Nigeria’s fastest logistics network. Real-time tracking. Zero excuses. 
+                    From Lagos to Maiduguri in 48 hours or less.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#register" onclick="smoothScrollTo('register')" 
+                       class="px-10 py-6 bg-white text-slate-950 font-semibold text-lg rounded-3xl flex items-center gap-x-3 hover:scale-105 transition-all shadow-2xl">
+                        REGISTER SHIPMENT
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    
+                    <a href="#track" onclick="smoothScrollTo('track')" 
+                       class="px-10 py-6 border-2 border-white/70 font-semibold text-lg rounded-3xl flex items-center gap-x-3 hover:bg-white/10 transition-all">
+                        TRACK YOUR ORDER
+                    </a>
+                </div>
+                
+                <div class="flex items-center gap-x-8 text-sm">
+                    <div class="flex -space-x-4">
+                        <div class="w-9 h-9 bg-emerald-500 rounded-2xl border-2 border-slate-950 flex items-center justify-center text-xs font-bold">4.9</div>
+                    </div>
+                    <div>
+                        <div class="text-emerald-400 font-medium">4.98 • 12,459 reviews</div>
+                        <div class="text-slate-500 text-xs">Trustpilot • Google • Jumia</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated truck visual -->
+            <div class="relative hidden md:block">
+                <div class="absolute -right-10 top-12 text-[280px] opacity-10">🚚</div>
+                <div class="bg-slate-900/70 backdrop-blur-xl border border-slate-700 rounded-3xl p-8 shadow-2xl">
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <div class="text-emerald-400 text-xs tracking-widest font-bold">LIVE TRACKING</div>
+                            <div class="text-4xl font-semibold logo-font">SPD-938472</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 text-5xl font-bold">98%</div>
+                            <div class="text-xs text-slate-400">ON TIME</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fake map line -->
+                    <div class="h-48 bg-slate-950 rounded-2xl relative overflow-hidden border border-slate-700 flex items-center justify-center">
+                        <div class="text-slate-600 text-8xl absolute truck">🚚</div>
+                        <div class="w-full h-px bg-gradient-to-r from-transparent via-sky-400 to-transparent absolute top-1/2"></div>
+                        <div class="absolute top-8 left-8 bg-slate-900 px-4 py-1 rounded-xl text-xs flex items-center gap-x-2">
+                            <i class="fas fa-map-marker-alt text-red-500"></i>
+                            <span>Lagos</span>
+                        </div>
+                        <div class="absolute bottom-8 right-8 bg-slate-900 px-4 py-1 rounded-xl text-xs flex items-center gap-x-2">
+                            <i class="fas fa-map-marker-alt text-emerald-500"></i>
+                            <span>Abuja</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scrolling banner -->
+        <div class="absolute bottom-8 left-0 right-0 flex gap-x-12 overflow-hidden">
+            <div class="flex gap-x-12 animate-marquee whitespace-nowrap text-slate-400 text-sm font-medium">
+                <span>📍 48 STATES • </span>
+                <span>🚀 SAME-DAY LAGOS • </span>
+                <span>🔒 SECURED VAULTS • </span>
+                <span>📱 REAL-TIME GPS • </span>
+                <span>📍 48 STATES • </span>
+                <span>🚀 SAME-DAY LAGOS • </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline px-6 py-2 bg-slate-800 rounded-3xl text-sky-400 text-sm font-semibold">WHAT WE DO BEST</div>
+                <h2 class="text-5xl font-bold logo-font mt-4">Lightning Delivery. Zero Stress.</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-10 group">
+                    <div class="text-6xl mb-8 group-hover:rotate-12 transition-transform">📦</div>
+                    <h3 class="text-2xl font-semibold mb-3">Express Domestic</h3>
+                    <p class="text-slate-400">Lagos → Any city in Nigeria under 48 hrs. Same-day in Lagos &amp; Abuja.</p>
+                    <div class="mt-8 text-emerald-400 font-medium flex items-center gap-x-2">
+                        STARTING AT ₦4,500 <span class="text-xs text-slate-500">→</span>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-10 group">
+                    <div class="text-6xl mb-8 group-hover:-rotate-12 transition-transform">🌍</div>
+                    <h3 class="text-2xl font-semibold mb-3">International Freight</h3>
+                    <p class="text-slate-400">China, UK, USA, Dubai → Doorstep delivery. Customs cleared.</p>
+                    
+
+                
+                <!-- Card 3 -->
+                <div class="card-hover bg-slate-950 border border-slate-800 rounded-3xl p-10 group">
+                    <div class="text-6xl mb-8 group-hover:scale-110 transition-transform">🔒</div>
+                    <h3 class="text-2xl font-semibold mb-3">Secure Vault Storage</h3>
+                    <p class="text-slate-400">Temperature-controlled warehouses. 24/7 CCTV &amp; insurance.</p>
+                    <div class="mt-8 text-emerald-400 font-medium flex items-center gap-x-2">
+                        FREE FIRST 7 DAYS <span class="text-xs text-slate-500">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTER SECTION -->
+    <section id="register" class="py-24 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-12 md:p-16 shadow-2xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-5xl font-bold logo-font">Register Your Shipment</h2>
+                    <p class="text-slate-400 mt-3 text-lg">Takes 45 seconds. Get your tracking ID instantly.</p>
+                </div>
+                
+                <form id="registerForm" class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">FULL NAME</label>
+                        <input id="fullName" type="text" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">GMAIL ADDRESS</label>
+                        <input id="email" type="email" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">PHONE NUMBER</label>
+                        <input id="phone" type="tel" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">HOME / DELIVERY ADDRESS</label>
+                        <input id="address" type="text" required 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">CITY / STATE</label>
+                        <input id="cityState" type="text" required placeholder="e.g. Ikeja, Lagos" 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-2">PACKAGE DESCRIPTION</label>
+                        <input id="packageDesc" type="text" required placeholder="iPhone 15, 2kg" 
+                               class="form-input w-full bg-slate-950 border border-slate-700 focus:border-sky-500 rounded-2xl px-6 py-5 text-lg outline-none">
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <button type="submit" 
+                                class="w-full py-7 bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 font-bold text-2xl rounded-3xl shadow-2xl transition-all active:scale-95">
+                            GENERATE TRACKING ID &amp; CONFIRM
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRACK SECTION -->
+    <section id="track" class="py-24 bg-slate-950">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="mx-auto w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mb-6 text-5xl">📍</div>
+                <h2 class="text-5xl font-bold logo-font">Track Your Order</h2>
+                <p class="text-slate-400 mt-4">Enter your tracking ID below</p>
+            </div>
+            
+            <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                <div class="flex gap-4">
+                    <input id="trackInput" type="text" placeholder="SPD-938472" 
+                           class="form-input flex-1 bg-slate-950 border border-slate-700 rounded-3xl px-8 py-6 text-2xl outline-none font-mono">
+                    <button onclick="trackOrder()" 
+                            class="px-14 bg-white text-slate-950 font-bold rounded-3xl text-xl hover:bg-emerald-400 transition-all">
+                        TRACK
+                    </button>
+                </div>
+                
+                <!-- Result area -->
+                <div id="trackResult" class="hidden mt-10 bg-slate-950 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-emerald-400 text-xs font-bold tracking-widest mb-1">STATUS</div>
+                            <div id="statusText" class="text-3xl font-semibold text-amber-400">OUTSTANDING DELIVERY PAYMENT</div>
+                            <div class="text-6xl font-bold text-white mt-1" id="amount">$200</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="tracking-bar rounded-full w-24"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 bg-slate-950 border border-dashed border-slate-600 rounded-2xl p-6 text-center">
+                        <div class="text-slate-400 text-sm mb-3">TO PROCEED WITH DELIVERY</div>
+                        <a href="mailto:speedaflogistics2@gmail.com" 
+                           class="inline-flex items-center gap-x-3 bg-slate-800 hover:bg-slate-700 px-8 py-5 rounded-3xl text-lg font-medium">
+                            <i class="fas fa-envelope"></i>
+                            CONTACT speedaflogistics2@gmail.com
+                        </a>
+                        <div class="text-[10px] text-slate-500 mt-6">Payment unlocks instant dispatch</div>
+                    </div>
+                </div>
+                
+                <div id="errorMessage" class="hidden mt-8 text-red-400 text-center text-sm font-medium">
+                    ❌ Invalid tracking ID. Please check and try again.
+                </div>
+            </div>
+            
+            <div class="text-center text-slate-500 text-xs mt-8">
+                Your tracking ID was sent to your Gmail upon registration
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center items-center gap-x-3 mb-6">
+                <div class="w-9 h-9 bg-sky-500 rounded-2xl flex items-center justify-center text-3xl">🚚</div>
+                <span class="logo-font text-4xl font-bold">SPEEDAF</span>
+            </div>
+            <p class="text-slate-400">© 2026 Speedaf Logistics. Made with 🔥 on an iPhone.</p>
+            <p class="text-[10px] text-slate-600 mt-8">Demo site for illustration purposes • All data stored locally in your browser</p>
+        </div>
+    </footer>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[999] flex items-center justify-center">
+        <div class="success-modal bg-slate-900 max-w-md w-full mx-4 rounded-3xl p-10 text-center border border-emerald-500">
+            <div class="text-7xl mb-6">🎉</div>
+            <h3 class="text-4xl font-bold mb-2">Registration Complete!</h3>
+            <p class="text-slate-400 mb-8">Your shipment is now in our system.</p>
+            
+            <div class="bg-slate-950 rounded-2xl p-6 mb-8">
+                <div class="text-xs text-emerald-400 font-medium tracking-widest">YOUR TRACKING ID</div>
+                <div id="generatedId" class="font-mono text-5xl font-bold text-white mt-2 tracking-widest">SPD-XXXXXX</div>
+            </div>
+            
+            <button onclick="closeModal()" 
+                    class="w-full py-6 bg-emerald-500 hover:bg-emerald-600 text-xl font-bold rounded-3xl">
+                GOT IT — SAVE THIS ID
             </button>
+            
+            <div class="text-[10px] text-slate-500 mt-6">
+                A confirmation email has been simulated to your Gmail
+            </div>
         </div>
     </div>
 
     <script>
-        let balance = 430056.70;
-        let balanceVisible = true;
-
-        const transactions = [
-            { date:"Mar 17", desc:"Salary deposit",         amt:"+4,820.00", color:"emerald" },
-            { date:"Mar 16", desc:"Coffee & groceries",     amt:"-42.15",    color:"rose"    },
-            { date:"Mar 15", desc:"Online shopping",        amt:"-289.99",   color:"rose"    },
-            { date:"Mar 14", desc:"Rent transfer",          amt:"-2,100.00", color:"rose"    },
-            { date:"Mar 13", desc:"Freelance payment",      amt:"+1,750.00", color:"emerald" }
-        ];
-
-        function renderTx() {
-            const container = document.getElementById("tx-list");
-            container.innerHTML = "";
-            transactions.forEach(t => {
-                const row = document.createElement("div");
-                row.className = "flex justify-between items-center px-6 py-4 hover:bg-zinc-900/40 transition";
-                row.innerHTML = `
-                    <div>
-                        <div class="text-xs text-zinc-500">${t.date}</div>
-                        <div class="font-medium">${t.desc}</div>
-                    </div>
-                    <span class="font-semibold text-${t.color}-400">${t.amt}</span>
-                `;
-                container.appendChild(row);
-            });
+        // Tailwind script run
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
         }
-
-        function animateBalance() {
-            const el = document.getElementById("balance-display");
-            if (!el) return;
-
-            if (!balanceVisible) {
-                el.textContent = "•••••••••";
-                el.classList.remove("shimmer-balance");
+        
+        // Smooth scroll
+        function smoothScrollTo(section) {
+            const el = document.getElementById(section);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+        
+        // Generate random tracking ID
+        function generateTrackingId() {
+            const prefix = "SPD";
+            const random = Math.floor(100000 + Math.random() * 900000);
+            return `${prefix}-${random}`;
+        }
+        
+        // Store clients in localStorage
+        function saveClient(clientData) {
+            let clients = JSON.parse(localStorage.getItem("speedaf_clients")) || [];
+            clients.push(clientData);
+            localStorage.setItem("speedaf_clients", JSON.stringify(clients));
+        }
+        
+        // Register form handler
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            const cityState = document.getElementById("cityState").value;
+            const packageDesc = document.getElementById("packageDesc").value;
+            
+            const trackingId = generateTrackingId();
+            
+            const client = {
+                id: trackingId,
+                name: fullName,
+                email: email,
+                phone: phone,
+                address: address,
+                cityState: cityState,
+                package: packageDesc,
+                timestamp: new Date().toISOString()
+            };
+            
+            saveClient(client);
+            
+            // Show modal
+            document.getElementById("generatedId").textContent = trackingId;
+            document.getElementById("successModal").classList.remove("hidden");
+            document.getElementById("successModal").classList.add("flex");
+            
+            // Clear form
+            this.reset();
+        });
+        
+        function closeModal() {
+            const modal = document.getElementById("successModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            
+            // Scroll to track section
+            setTimeout(() => {
+                document.getElementById("track").scrollIntoView({ behavior: "smooth" });
+            }, 600);
+        }
+        
+        // Track order function
+        function trackOrder() {
+            const input = document.getElementById("trackInput").value.trim().toUpperCase();
+            const resultDiv = document.getElementById("trackResult");
+            const errorDiv = document.getElementById("errorMessage");
+            
+            if (!input) {
+                errorDiv.textContent = "❌ Please enter a tracking ID";
+                errorDiv.classList.remove("hidden");
+                resultDiv.classList.add("hidden");
                 return;
             }
-
-            el.classList.add("shimmer-balance");
-            el.textContent = "$" + balance.toLocaleString("en-US", {minimumFractionDigits:2});
-
-            setTimeout(() => el.classList.remove("shimmer-balance"), 2200);
-        }
-
-        function toggleBalance() {
-            balanceVisible = !balanceVisible;
-            document.getElementById("eye-icon").className = balanceVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
-            animateBalance();
-        }
-
-        // ─── Login flow ───────────────────────────────────────
-        document.getElementById("login-form").addEventListener("submit", e => {
-            e.preventDefault();
-            const email = document.getElementById("email").value.trim();
-            const pass  = document.getElementById("password").value.trim();
-
-            if (email === "Sandrabullocks@gmail.com" && pass === "#Godtrust098") {
-                document.getElementById("login-page").classList.add("hidden");
-                document.getElementById("verification-page").classList.remove("hidden");
+            
+            // Check localStorage
+            let clients = JSON.parse(localStorage.getItem("speedaf_clients")) || [];
+            const found = clients.find(c => c.id === input);
+            
+            if (found || input.startsWith("SPD-")) {
+                // Show success result (demo always shows payment pending)
+                errorDiv.classList.add("hidden");
+                resultDiv.classList.remove("hidden");
+                
+                // Fake amount animation
+                const amountEl = document.getElementById("amount");
+                amountEl.style.transition = "all 1s";
+                amountEl.style.transform = "scale(1.2)";
+                setTimeout(() => amountEl.style.transform = "scale(1)", 300);
             } else {
-                alert("Please Input the correct Credentials to Login.");
-            }
-        });
-
-        function verifyCode() {
-            if (document.getElementById("verify-code").value.trim() === "705035") {
-                document.getElementById("verification-page").classList.add("hidden");
-                document.getElementById("dashboard-page").classList.remove("hidden");
-                animateBalance();
-                renderTx();
-            } else {
-                alert("Incorrect Code Try Again");
+                resultDiv.classList.add("hidden");
+                errorDiv.classList.remove("hidden");
+                errorDiv.textContent = "❌ Invalid tracking ID. Please check and try again.";
             }
         }
-
-        function backToLogin() {
-            document.getElementById("verification-page").classList.add("hidden");
-            document.getElementById("login-page").classList.remove("hidden");
-        }
-
-        // ─── Deposit ──────────────────────────────────────────
-        function showDepositModal() { document.getElementById("deposit-modal").classList.remove("hidden"); }
-        function hideDepositModal() { document.getElementById("deposit-modal").classList.add("hidden"); }
-
-        function processDeposit() {
-            const amt = parseFloat(document.getElementById("deposit-amt").value);
-            if (!amt || amt <= 0) return alert("Please enter a valid amount greater than $0.");
-            balance += amt;
-            animateBalance();
-            hideDepositModal();
-
-            // fake success burst
-            const successEl = document.getElementById("success-emoji");
-            successEl.textContent = ["🎉","💰","✅","✨"][Math.floor(Math.random()*4)];
-            document.getElementById("success-modal").classList.remove("hidden");
-            setTimeout(() => document.getElementById("success-modal").classList.add("hidden"), 2200);
-        }
-
-        // ─── Send ─────────────────────────────────────────────
-        function showSendModal() { document.getElementById("send-modal").classList.remove("hidden"); }
-        function hideSendModal() { document.getElementById("send-modal").classList.add("hidden"); }
-
-        function processSend() {
-            const to  = document.getElementById("send-to").value.trim();
-            const amt = parseFloat(document.getElementById("send-amt").value);
-
-            if (!to)    return alert("Please enter a recipient.");
-            if (!amt || amt <= 0) return alert("Please enter a valid amount > $0.");
-
-            hideSendModal();
-            document.getElementById("success-modal").classList.remove("hidden");
-        }
-
-        // ─── Receive & success modal ──────────────────────────
-        function showReceiveModal() { document.getElementById("receive-modal").classList.remove("hidden"); }
-        function hideReceiveModal() { document.getElementById("receive-modal").classList.add("hidden"); }
-        function hideSuccessModal() { document.getElementById("success-modal").classList.add("hidden"); }
-
-        function logout() {
-            if (confirm("End this session?")) location.reload();
-        }
-
-        // Event listeners
-        document.getElementById("toggle-balance-btn")?.addEventListener("click", toggleBalance);
-
-        document.getElementById("notif-btn")?.addEventListener("click", () => {
-            document.getElementById("notif-dropdown").classList.toggle("hidden");
-        });
-
-        window.addEventListener("click", e => {
-            if (!e.target.closest("#notif-btn")) {
-                document.getElementById("notif-dropdown")?.classList.add("hidden");
+        
+        // Keyboard support for track
+        document.getElementById("trackInput").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                trackOrder();
             }
         });
-
-        window.addEventListener("keydown", e => {
-            if (e.key === "Escape") {
-                document.querySelectorAll(".fixed.inset-0:not(.hidden)").forEach(m => m.classList.add("hidden"));
+        
+        // Confetti on modal open (light version)
+        function launchConfetti() {
+            // Simple confetti using canvas (minimal)
+            console.log("%c🎉 Shipment registered! ID saved locally.", "color:#22c55e; font-size:13px");
+        }
+        
+        // Initialize everything
+        function init() {
+            initializeTailwind();
+            
+            // Demo data if none exists
+            if (!localStorage.getItem("speedaf_clients")) {
+                const demo = {
+                    id: "SPD-938472",
+                    name: "Demo Client",
+                    email: "demo@gmail.com"
+                };
+                localStorage.setItem("speedaf_clients", JSON.stringify([demo]));
             }
-        });
+            
+            // Make navbar transparent on scroll
+            window.addEventListener("scroll", () => {
+                const nav = document.querySelector("nav");
+                if (window.scrollY > 80) {
+                    nav.classList.add("shadow-2xl");
+                } else {
+                    nav.classList.remove("shadow-2xl");
+                }
+            });
+            
+            // Auto-focus on track input when section visible (nice touch)
+            console.log("%c✅ Speedaf Logistics demo ready! Paste this entire code into GitHub as index.html", "color:#0ea5e9; font-weight:bold");
+        }
+        
+        window.onload = init;
     </script>
 </body>
 </html>
