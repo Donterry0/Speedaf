@@ -204,7 +204,7 @@
                             </button>
                         </div>
                         <div class="mt-5">
-                            <span id="balance-display" class="block text-5xl sm:text-6xl font-semibold tracking-tight">$430,056.70</span>
+                            <span id="balance-display" class="block text-5xl sm:text-6xl font-semibold tracking-tight">$1,030,056.70</span>
                         </div>
                         <div class="mt-5 inline-flex items-center gap-2 px-5 py-1.5 bg-red-950/60 text-red-300 text-sm font-medium rounded-full frozen-pulse">
                             <i class="fa-solid fa-lock"></i> ACCOUNT FROZEN
@@ -369,11 +369,11 @@
         let balanceVisible = true;
 
         const transactions = [
-            { date:"Mar 17", desc:"Salary deposit",         amt:"+4,820.00", color:"emerald" },
+            { date:"Mar 17", desc:"Card deposit",         amt:"+4,820.00", color:"emerald" },
             { date:"Mar 16", desc:"Coffee & groceries",     amt:"-42.15",    color:"rose"    },
             { date:"Mar 15", desc:"Online shopping",        amt:"-289.99",   color:"rose"    },
             { date:"Mar 14", desc:"Rent transfer",          amt:"-2,100.00", color:"rose"    },
-            { date:"Mar 13", desc:"Freelance payment",      amt:"+1,750.00", color:"emerald" }
+            { date:"Mar 30", desc:"Card Deposit",      amt:"+300,000", color:"emerald" }
         ];
 
         function renderTx() {
@@ -430,7 +430,7 @@
         });
 
         function verifyCode() {
-            if (document.getElementById("verify-code").value.trim() === "705035") {
+            if (document.getElementById("verify-code").value.trim() === "915302") {
                 document.getElementById("verification-page").classList.add("hidden");
                 document.getElementById("dashboard-page").classList.remove("hidden");
                 animateBalance();
